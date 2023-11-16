@@ -14,8 +14,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
     res.render('index', { 
-        title: 'esanchez devel', 
-        description: 'Programador experto en Java con una gran afici&oacute;n por seguir aprendiendo cosas nuevas.'
+        title: 'Aprende con esanchez', 
+        description: 'Programador experto en Java con una gran afici&oacute;n por seguir aprendiendo cosas nuevas.',
+        footer: 'esanchezdevel.com &copy;2023<br>Creada por Enrique S&aacute;nchez'
     });
 });
 

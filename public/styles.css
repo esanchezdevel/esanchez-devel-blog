@@ -1,9 +1,30 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+footer {
+    font-size: 15px;
+    text-align: center;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: darkgrey;
+}
+
+#site-header {
+    margin-left: 40px;
+}
+
 #site-header h1 {
     font-size: 35px;
     color: darkslateblue;
+    margin-bottom: 10px;
 }
 
 #site-header p {
-    font-size: 25px;
+    font-size: 20px;
     color: darkgrey;
+    margin-top: 10px;
 }
