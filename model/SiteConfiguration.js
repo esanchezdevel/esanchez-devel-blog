@@ -5,6 +5,7 @@ const siteConfigurationSchema = new mongoose.Schema({
     value: String,
 });
 
-const SiteConfiguration = mongoose.model('SiteConfiguration', siteConfigurationSchema);
+const collectionName = 'siteConfigurations';
+const SiteConfiguration = mongoose.model('SiteConfiguration', siteConfigurationSchema, collectionName);
 
 module.exports = SiteConfiguration;
