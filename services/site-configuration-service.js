@@ -1,38 +1,37 @@
 const mongoose = require('mongoose');
-const dbConnection = require('./dbConnection');
+const dbConnection = require('./db-connection');
 const SiteConfiguration = require('../model/SiteConfiguration');
 const config = require('../config');
 
 async function getSiteConfiguration() {
+  console.log('Getting site configuration...');
   try {
-
     dbConnection.connect();
-
-    // Evento emitido cuando la conexión se cierra
-    mongoose.connection.on('disconnected', () => {
-      console.log('Conexión a MongoDB cerrada');
-    });
 
     // get title and description configuration from database
     
-    const data = await SiteConfiguration.find({ $or: [{ title: { $exists: true } }, { description: { $exists: true } }] });
-
-    // add each config to the result array
-    const result = {};
-    data.forEach(config => {
-      console.log(`reading config: ${JSON.stringify(config)}`);
-      if (config.toObject().title) {
-        result.title = config.toObject().title;
-      }
-      if (config.toObject().description) {
-        result.description = config.toObject().description;
-      }
-    });
-
-    console.log(`result title: ${result.title}`);
-    console.log(`result description: ${result.description}`);
-    //await mongoose.connection.close();
     
+    mongoose.connection.on('connected', async () => {
+      console.log('connection stablished');
+
+      const data = await SiteConfiguration.find({ $or: [{ title: { $exists: true } }, { description: { $exists: true } }] });
+
+      // add each config to the result array
+      const result = {};
+      data.forEach(config => {
+        if (config.toObject().title) {
+          result.title = config.toObject().title;
+        }
+        if (config.toObject().description) {
+          result.description = config.toObject().description;
+        }
+      });
+
+      dbConnection.close();
+      console.log('TEST--title: ' + result.title);
+      return result;
+    });
+    console.log('TEST--title2: ' + result.title);
     return result;
   } catch (error) {
     console.error('Error obtaining data from database:', error);

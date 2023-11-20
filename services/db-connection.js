@@ -15,4 +15,8 @@ async function connect() {
     }
 }
 
-module.exports = { connect };
+async function close() {
+    await mongoose.connection.close();
+}
+
+module.exports = { connect, close };
