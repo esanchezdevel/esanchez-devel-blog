@@ -5,11 +5,25 @@ const config = require('../config');
 async function getSiteConfiguration() {
   try {
     // configure mongodb connections
-    await mongoose.connect(config.mongoURI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+    const connection = await mongoose.connect(config.mongoURI, {
+        useNewUrlParser: true
+    });
+    console.log(`MongoDB connected: {connection.connection.host}`);
+
+    // Evento emitido cuando la conexión es exitosa
+    mongoose.connection.on('connected', () => {
+      console.log('Conexión a MongoDB establecida correctamente');
     });
 
+    // Evento emitido cuando hay un error en la conexión
+    mongoose.connection.on('error', (err) => {
+      console.error('Error en la conexión a MongoDB:', err);
+    });
+
+    // Evento emitido cuando la conexión se cierra
+    mongoose.connection.on('disconnected', () => {
+      console.log('Conexión a MongoDB cerrada');
+    });
 
     // get title and description configuration from database
     const data = await SiteConfiguration.find({ name: {$in: ['title', 'description']} });
@@ -20,7 +34,7 @@ async function getSiteConfiguration() {
       result[config.name] = config.value;
     });
 
-    mongoose.connection.close();
+    //await mongoose.connection.close();
 
     return result;
   } catch (error) {
