@@ -15,14 +15,22 @@ async function getSiteConfiguration() {
 
     // get title and description configuration from database
     
-    const data = await SiteConfiguration.find({ name: {$in: ['title', 'description']} });
+    const data = await SiteConfiguration.find({ $or: [{ title: { $exists: true } }, { description: { $exists: true } }] });
 
     // add each config to the result array
     const result = {};
     data.forEach(config => {
-      result[config.name] = config.value;
+      console.log(`reading config: ${JSON.stringify(config)}`);
+      if (config.toObject().title) {
+        result.title = config.toObject().title;
+      }
+      if (config.toObject().description) {
+        result.description = config.toObject().description;
+      }
     });
 
+    console.log(`result title: ${result.title}`);
+    console.log(`result description: ${result.description}`);
     //await mongoose.connection.close();
     
     return result;
