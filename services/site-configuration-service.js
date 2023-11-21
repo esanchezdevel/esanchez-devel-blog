@@ -1,5 +1,4 @@
 const dbConnection = require('./db-connection');
-const config = require('../config');
 
 async function getSiteConfiguration() {
   console.log('Getting site configuration...');
