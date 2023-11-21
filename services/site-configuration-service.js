@@ -1,41 +1,39 @@
-const mongoose = require('mongoose');
 const dbConnection = require('./db-connection');
-const SiteConfiguration = require('../model/SiteConfiguration');
 const config = require('../config');
 
 async function getSiteConfiguration() {
   console.log('Getting site configuration...');
+
+  var client;
   try {
-    dbConnection.connect();
+    console.log(`connecting to DB`);
+    client = await dbConnection.connect();
+    console.log('connection stablished');
 
-    // get title and description configuration from database
-    
-    
-    mongoose.connection.on('connected', async () => {
-      console.log('connection stablished');
+    const database = client.db('test');
+    const siteConfigurations = database.collection('siteConfigurations');
 
-      const data = await SiteConfiguration.find({ $or: [{ title: { $exists: true } }, { description: { $exists: true } }] });
+    // get site title and description from siteConfigurations collection in database.
+    const cursor = await siteConfigurations.find({ $or: [{ title: { $exists: true } }, { description: { $exists: true } }] });
+    const data = cursor.toArray();
 
-      // add each config to the result array
-      const result = {};
-      data.forEach(config => {
-        if (config.toObject().title) {
-          result.title = config.toObject().title;
-        }
-        if (config.toObject().description) {
-          result.description = config.toObject().description;
-        }
-      });
-
-      dbConnection.close();
-      console.log('TEST--title: ' + result.title);
-      return result;
+    // add each config to the result array
+    const result = {};
+    data.forEach(config => {
+      if (config.title) {
+        result.title = config.title;
+      }
+      if (config.description) {
+        result.description = config.description;
+      }
     });
-    console.log('TEST--title2: ' + result.title);
     return result;
   } catch (error) {
-    console.error('Error obtaining data from database:', error);
+    console.error('ERROR obtaining data from database:', error);
     throw error;
+  } finally {
+    console.log('closing connection');
+    client.close();
   }
 }
 

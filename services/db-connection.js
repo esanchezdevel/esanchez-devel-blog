@@ -1,22 +1,21 @@
-const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
 const config = require('../config');
 
 async function connect() {
     try {
         console.log('connecting to ' + config.mongoURI);
 
-        const conn = await mongoose.connect(config.mongoURI, {
-            useNewUrlParser: true,
-        });
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
+        const client = new MongoClient(config.mongoURI);
+
+        await client.connect();
+    
+        console.log(`MongoDB connected`);
+
+        return client;
     } catch (error) {
         console.error(error.message);
         process.exit(1);
     }
 }
 
-async function close() {
-    await mongoose.connection.close();
-}
-
-module.exports = { connect, close };
+module.exports = { connect };
