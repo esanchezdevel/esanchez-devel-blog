@@ -3,6 +3,7 @@ const mustacheExpress = require('mustache-express');
 const path = require('path');
 const app = express();
 const siteConfigurationService = require('./services/site-configuration-service');
+const postsService = require('./services/posts-service');
 
 const port = 4200;
 
@@ -17,8 +18,10 @@ app.get('/', async (req, res) => {
 
     try {
         const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
+        const posts = await postsService.getLastPosts();
         res.render('index', {
             siteConfiguration: siteConfiguration,
+            posts: posts,
             footer: 'esanchezdevel.com &copy;2023<br>Creada por Enrique S&aacute;nchez'
         });
     } catch (error) {

@@ -13,6 +13,16 @@
                 <p>{{{ siteConfiguration.description }}}</p>
             </header>
             <hr>
+            <section id = "posts">
+                <ul>
+                {{#posts}}
+                    <li>
+                        <h2>{{title}}</h2>
+                        <p>{{content}}</p>
+                    </li>
+                {{/posts}}
+                </ul>
+            </section>
             <footer>
                 <p>{{{ footer }}}</p>
             </footer>
