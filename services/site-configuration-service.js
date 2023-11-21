@@ -14,8 +14,8 @@ async function getSiteConfiguration() {
     const siteConfigurations = database.collection('siteConfigurations');
 
     // get site title and description from siteConfigurations collection in database.
-    const cursor = await siteConfigurations.find({ $or: [{ title: { $exists: true } }, { description: { $exists: true } }] });
-    const data = cursor.toArray();
+    const cursor = siteConfigurations.find({ $or: [{ title: { $exists: true } }, { description: { $exists: true } }] });
+    const data = await cursor.toArray();
 
     // add each config to the result array
     const result = {};
