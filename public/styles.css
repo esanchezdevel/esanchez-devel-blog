@@ -25,7 +25,9 @@ hr {
 }
 
 #site-header {
-    margin-left: 40px;
+    margin-left: 100px;
+    padding-top: 20px;
+    padding-bottom: 10px;
 }
 
 #site-header h1 {
@@ -44,12 +46,35 @@ hr {
     float: left;
     width: 70%;
     height: 100%;
-    padding-bottom: 20%;
+    padding-bottom: 100px;
+}
+
+#last-posts h2, ul {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+#last-posts ul {
+    list-style-type: none;
 }
 
 #right-aside {
     float: left;
-    width: 30%;
     height: 100%;
-    padding-bottom: 20%;
+    width: 29%;
+    border-left: 1px solid darkgrey;
+    border-bottom: 1px solid darkgrey;
+}
+
+#right-aside h2 {
+    padding-left: 20px;
+}
+
+#right-aside ul {
+    list-style-type: none;
+    padding-left: 40px;
+}
+
+#right-aside li {
+    padding-bottom: 10px;
 }
