@@ -13,12 +13,15 @@ async function getLastPosts() {
         const database = client.db('test');
         const posts = database.collection('posts');
 
-        const cursor = posts.find(); //TODO get only the last posts.
+        const cursor = posts.find().sort({date: -1}).limit(NUMBER_OF_POSTS);
         const data = await cursor.toArray();
 
         // add each config to the result array
         const result = [];
+        const maxLength = 700;
         data.forEach(post => {
+            const content = post.content.length > maxLength ? post.content.substring(0, maxLength) + '...' : post.content;
+            post.content = content;
             result.push(post);
         });
         return result;

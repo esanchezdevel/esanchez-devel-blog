@@ -3,22 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{ title }}</title>
+        <title>{{{ siteConfiguration.title }}}</title>
         <link rel="stylesheet" type="text/css" href="/styles.css">
     </head>
     <body>
         <main>
             <header id = "site-header">
-                <h1>{{ siteConfiguration.title }}</h1>
+                <h1>{{{ siteConfiguration.title }}}</h1>
                 <p>{{{ siteConfiguration.description }}}</p>
             </header>
             <hr>
             <section id = "posts">
                 <ul>
-                {{#posts}}
+                {{ #posts }}
                     <li>
-                        <h2>{{title}}</h2>
-                        <p>{{content}}</p>
+                        <h2>{{{ title }}}</h2>
+                        <p>{{{ content }}}</p>
                     </li>
                 {{/posts}}
                 </ul>
