@@ -13,16 +13,31 @@
                 <p>{{{ siteConfiguration.description }}}</p>
             </header>
             <hr>
-            <section id = "posts">
+            <section id = "last-posts">
+                <h2>&Uacute;ltimas novedades:</h2>
                 <ul>
                 {{ #posts }}
                     <li>
-                        <h2>{{{ title }}}</h2>
+                        <h3>{{{ title }}}</h3>
                         <p>{{{ content }}}</p>
                     </li>
                 {{/posts}}
                 </ul>
             </section>
+            <aside id = "right-aside">
+                <h2>Men&uacute;</h2>
+                <ul>
+                    <li>
+                        Categor&iacute;as
+                        <ul>
+                            <li>Programaci&oacute;n</li>
+                            <li>Baloncesto</li>
+                            <li>Cine y M&uacute;sica</li>
+                            <li>Otros</li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
             <footer>
                 <p>{{{ footer }}}</p>
             </footer>

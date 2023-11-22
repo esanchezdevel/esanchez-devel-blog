@@ -1,10 +1,21 @@
-body {
+html, body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 footer {
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    top: 90%;
     font-size: 15px;
     text-align: center;
+    background: #035dc1;
+    color: white;
+    padding-top: 10px;
 }
 
 hr {
@@ -19,7 +30,7 @@ hr {
 
 #site-header h1 {
     font-size: 35px;
-    color: darkslateblue;
+    color: #035dc1;
     margin-bottom: 10px;
 }
 
@@ -27,4 +38,18 @@ hr {
     font-size: 20px;
     color: darkgrey;
     margin-top: 10px;
+}
+
+#last-posts {
+    float: left;
+    width: 70%;
+    height: 100%;
+    padding-bottom: 20%;
+}
+
+#right-aside {
+    float: left;
+    width: 30%;
+    height: 100%;
+    padding-bottom: 20%;
 }
