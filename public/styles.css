@@ -26,14 +26,15 @@ hr {
 
 #site-header {
     margin-left: 100px;
-    padding-top: 20px;
-    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
 
 #site-header h1 {
     font-size: 35px;
     color: #035dc1;
     margin-bottom: 10px;
+    text-shadow: 2px 2px 2px darkgrey;
 }
 
 #site-header p {
@@ -54,8 +55,30 @@ hr {
     padding-right: 100px;
 }
 
+#last-posts h2 {
+    color: darkgrey;
+}
+
+#last-posts h3 {
+    color: #035dc1;
+}
+
+
 #last-posts ul {
     list-style-type: none;
+}
+
+#last-posts li:nth-child(even) {
+    background: lightgrey;
+}
+
+#last-posts li:nth-child(odd) {
+    background: white;
+}
+
+#last-posts li {
+    list-style-type: none;
+    border-bottom: 1px solid darkgrey;
 }
 
 #right-aside {
