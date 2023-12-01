@@ -26,14 +26,15 @@ hr {
 
 #site-header {
     margin-left: 100px;
-    padding-top: 10px;
+    padding-top: 20px;
     padding-bottom: 5px;
 }
 
 #site-header h1 {
-    font-size: 35px;
+    font-size: 45px;
     color: #035dc1;
     margin-bottom: 10px;
+    margin-top: 5px;
     text-shadow: 2px 2px 2px darkgrey;
 }
 
