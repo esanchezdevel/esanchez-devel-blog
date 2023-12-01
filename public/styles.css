@@ -69,7 +69,7 @@ hr {
 }
 
 #last-posts li:nth-child(even) {
-    background: lightgrey;
+    background: #f3f3f3;
 }
 
 #last-posts li:nth-child(odd) {
@@ -78,7 +78,13 @@ hr {
 
 #last-posts li {
     list-style-type: none;
-    border-bottom: 1px solid darkgrey;
+    border: 1px solid darkgrey;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 5px 5px 5px black;
+    line-height: 1.4em;
 }
 
 #right-aside {
