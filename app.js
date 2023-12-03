@@ -21,8 +21,7 @@ app.get('/', async (req, res) => {
         const posts = await postsService.getLastPosts();
         res.render('index', {
             siteConfiguration: siteConfiguration,
-            posts: posts,
-            footer: 'esanchezdevel.com &copy;2023<br>Creada por Enrique S&aacute;nchez'
+            posts: posts
         });
     } catch (error) {
         console.error('Error rendering the view:', error);
@@ -34,9 +33,17 @@ app.get('/post/:postId', async (req, res) => {
 
     console.log(`post received: ${req.params.postId}`);
 
-    res.render('post', {
-
-    })
+    try {
+        const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
+        const post = await postsService.getPostById(req.params.postId);
+        res.render('post', {
+            siteConfiguration: siteConfiguration,
+            post: post
+        });
+    } catch (error) {
+        console.error('Error rendering the view:', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 app.listen(port, () => {

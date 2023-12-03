@@ -13,7 +13,7 @@ async function getSiteConfiguration() {
     const siteConfigurations = database.collection('siteConfigurations');
 
     // get site title and description from siteConfigurations collection in database.
-    const cursor = siteConfigurations.find({ $or: [{ title: { $exists: true } }, { description: { $exists: true } }] });
+    const cursor = siteConfigurations.find({ $or: [{ title: { $exists: true } }, { description: { $exists: true } }, { footer: { $exists: true} }] });
     const data = await cursor.toArray();
 
     // add each config to the result array
@@ -24,6 +24,9 @@ async function getSiteConfiguration() {
       }
       if (config.description) {
         result.description = config.description;
+      }
+      if (config.footer) {
+        result.footer = config.footer;
       }
     });
     return result;

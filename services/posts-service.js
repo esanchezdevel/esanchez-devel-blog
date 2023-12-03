@@ -34,4 +34,27 @@ async function getLastPosts() {
     }
 }
 
-module.exports = { getLastPosts };
+async function getPostById(postId) {
+    console.log(`getting Post with id ${postId}`);
+
+    var client;
+
+    try {
+        client = await dbConnection.connect();
+
+        const database = client.db('test');
+        const posts = database.collection('posts');
+
+        const post = posts.findOne({ post_id: postId});
+
+        return post;
+    } catch (error) {
+        console.error('ERROR obtaining post from database:', error);
+        throw error;
+    } finally {
+        console.log(`closing connection in posts-service`);
+        await client.close();
+    }
+}
+
+module.exports = { getLastPosts, getPostById };
