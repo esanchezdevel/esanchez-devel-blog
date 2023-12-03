@@ -30,6 +30,15 @@ app.get('/', async (req, res) => {
     }
 });
 
+app.get('/post/:postId', async (req, res) => {
+
+    console.log(`post received: ${req.params.postId}`);
+
+    res.render('post', {
+
+    })
+});
+
 app.listen(port, () => {
     console.log(`Server listening on port: ${port}`);
 });
