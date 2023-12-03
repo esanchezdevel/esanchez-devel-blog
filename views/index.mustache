@@ -17,13 +17,13 @@
                 <h2>&Uacute;ltimas novedades:</h2>
                 <ul>
                 {{ #posts }}
-                    <a href = "/post/{{ post_id }}">
-                        <li>
+                    <li>
+                        <a href = "/post/{{ post_id }}">
                             <h3>{{{ title }}}</h3>
                             <hr>
                             <p>{{{ content }}}</p>
-                        </li>
-                    <a>
+                        <a>
+                    </li>
                 {{/posts}}
                 </ul>
             </section>
