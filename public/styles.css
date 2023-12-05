@@ -99,6 +99,28 @@ hr {
     color: black;
 }
 
+#post {
+    float: left;
+    width: 70%;
+    height: 100%;
+    padding-bottom: 100px;
+    border: 1px solid darkgrey;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 5px 5px 5px black;
+}
+
+#post h2 {
+    color: #035dc1;
+}
+
+#post p {
+    color: black;
+    line-height: 1.4em;
+}
+
 #right-aside {
     float: left;
     height: 100%;
