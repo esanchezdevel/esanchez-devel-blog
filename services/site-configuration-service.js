@@ -35,7 +35,6 @@ async function getSiteConfiguration() {
     console.error('ERROR obtaining data from database:', error);
     throw error;
   } finally {
-    console.log('closing connection');
     client.close();
   }
 }

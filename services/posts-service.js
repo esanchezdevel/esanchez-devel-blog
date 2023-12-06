@@ -30,7 +30,6 @@ async function getLastPosts() {
         console.error('ERROR obtaining posts from database:', error);
         throw error;
     } finally {
-        console.log(`closing connection in posts-service`);
         await client.close();
     }
 }
@@ -53,7 +52,6 @@ async function getPostById(postId) {
         console.error('ERROR obtaining post from database:', error);
         throw error;
     } finally {
-        console.log(`closing connection in posts-service`);
         await client.close();
     }
 }

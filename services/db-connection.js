@@ -3,13 +3,9 @@ const config = require('../config');
 
 async function connect() {
     try {
-        console.log('connecting to ' + config.mongoURI);
-
         const client = new MongoClient(config.mongoURI);
 
         await client.connect();
-    
-        console.log(`MongoDB connected`);
 
         return client;
     } catch (error) {
