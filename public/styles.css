@@ -30,9 +30,28 @@ hr {
     padding-bottom: 5px;
 }
 
+#site-header a:link {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#site-header a:active {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#site-header a:visited {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#site-header a:hover {
+    text-decoration: none;
+    color: lightblue;
+}
+
 #site-header h1 {
     font-size: 45px;
-    color: #035dc1;
     margin-bottom: 10px;
     margin-top: 5px;
     text-shadow: 2px 2px 2px darkgrey;
