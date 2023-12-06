@@ -45,7 +45,9 @@ async function getPostById(postId) {
         const database = client.db('test');
         const posts = database.collection('posts');
 
-        const post = posts.findOne({ post_id: postId});
+        const post = await posts.findOne({ post_id: parseFloat(postId) });
+
+        console.log(`Post retrieved: ${post}`);
 
         return post;
     } catch (error) {
