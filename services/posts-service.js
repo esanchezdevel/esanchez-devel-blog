@@ -1,4 +1,5 @@
 const dbConnection = require('./db-connection');
+const { DB_NAME, DB_COLLECTION_POSTS } = require('../utils/constants');
 
 const NUMBER_OF_POSTS = 5;
 
@@ -10,8 +11,8 @@ async function getLastPosts() {
     try {
         client = await dbConnection.connect();
 
-        const database = client.db('test');
-        const posts = database.collection('posts');
+        const database = client.db(DB_NAME);
+        const posts = database.collection(DB_COLLECTION_POSTS);
 
         const cursor = posts.find().sort({date: -1}).limit(NUMBER_OF_POSTS);
         const data = await cursor.toArray();
@@ -42,12 +43,10 @@ async function getPostById(postId) {
     try {
         client = await dbConnection.connect();
 
-        const database = client.db('test');
-        const posts = database.collection('posts');
+        const database = client.db(DB_NAME);
+        const posts = database.collection(DB_COLLECTION_POSTS);
 
         const post = await posts.findOne({ post_id: parseFloat(postId) });
-
-        console.log(`Post retrieved: ${post}`);
 
         return post;
     } catch (error) {
