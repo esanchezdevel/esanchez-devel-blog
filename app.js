@@ -63,11 +63,23 @@ app.get('/post/:postId', async (req, res) => {
 // Admin pages
 
 app.get('/admin', (req, res) => {
-    res.render('admin-login');
+    console.log(`Admin page`);
+    try {
+        if (req.session.loggedin) {
+            console.log(`User is already logged in.`);
+            res.render('admin-index', {});
+        } else {
+            console.log(`User is not logged in`);
+            res.render('admin-login');
+        }
+    } catch (error) {
+        console.error('Error rendering the view: ', error);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 
-app.post('/login', async(req, res) => {
+app.post('/admin/login', async(req, res) => {
 
     console.log(`Accessing to Admin login page`);
 
@@ -80,29 +92,10 @@ app.post('/login', async(req, res) => {
             console.log(`user is validated: ${userValidated}`)
             req.session.loggedin = true;
             req.session.username = username;
-            res.redirect('/admin/index');
         } else {
             console.log(`user is not validated: ${userValidated}`)
-            res.redirect('/admin');
         }
-    } catch (error) {
-        console.error('Error rendering the view: ', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-app.get('/admin/index', async(req, res) => {
-
-    console.log(`Accessing to Admin index page`);
-
-    try {
-        if (req.session.loggedin) {
-            console.log(`User is already logged in.`);
-            res.render('admin-index', {});
-        } else {
-            console.log(`User is not logged in`);
-            res.redirect('/admin');
-        }
+        res.redirect('/admin');
     } catch (error) {
         console.error('Error rendering the view: ', error);
         res.status(500).send('Internal Server Error');
