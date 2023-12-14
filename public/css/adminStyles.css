@@ -1,0 +1,32 @@
+#login-section {
+    width: 50%;
+    margin: auto;
+}
+
+#login-section h2, form {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login-section h2  {
+    color: #035dc1;
+}
+
+#login-username {
+    margin-bottom: 10px;
+}
+
+#login-password {
+    margin-bottom: 10px;
+}
+
+#login-username label{
+    display:inline-block;
+    width: 100px;
+}
+
+#login-password label{
+    display:inline-block;
+    width: 100px;
+}

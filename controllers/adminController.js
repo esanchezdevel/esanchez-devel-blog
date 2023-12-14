@@ -1,15 +1,18 @@
+const siteConfigurationService = require('../services/site-configuration-service');
 const usersService = require('../services/users-service');
 
 const adminController = {
     admin: async (req, res) => {
         console.log(`Admin page`);
         try {
+            const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
+
             if (req.session.loggedin) {
                 console.log(`User is already logged in.`);
-                res.render('admin-index', {});
+                res.render('admin-index', {siteConfiguration: siteConfiguration});
             } else {
                 console.log(`User is not logged in`);
-                res.render('admin-login');
+                res.render('admin-login', {siteConfiguration: siteConfiguration});
             }
         } catch (error) {
             console.error('Error rendering the view: ', error);

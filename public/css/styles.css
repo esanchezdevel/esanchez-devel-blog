@@ -24,6 +24,16 @@ hr {
     background: darkgrey;
 }
 
+.custom-button {
+    background: #035dc1;
+    color: white;
+    font-weight: bold;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px; 
+}
+
 #site-header {
     margin-left: 100px;
     padding-top: 20px;
