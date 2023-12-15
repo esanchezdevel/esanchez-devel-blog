@@ -90,3 +90,24 @@
     background: #035dc1;
     color: white;
 }
+
+#admin-new-post-section {
+    width: 50%;
+    margin: auto;
+}
+
+#admin-new-post-section h2, #admin-new-post-section form {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#admin-new-post-section h2 {
+    color: #035dc1;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+}
+
+#new-post-title, #new-post-content {
+    margin-bottom: 20px;
+}

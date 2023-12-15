@@ -40,6 +40,24 @@ const adminController = {
             console.error('Error rendering the view: ', error);
             res.status(500).send('Internal Server Error');
         }
+    }, 
+
+    postNew: async (req, res) => {
+        console.log(`New Post form page`);
+
+        try {
+            const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
+
+            if (req.session.loggedin) {
+                res.render('admin-post-new', {siteConfiguration: siteConfiguration});
+            } else {
+                console.log(`User is not logged in`);
+                res.render('admin-login', {siteConfiguration: siteConfiguration});
+            }
+        } catch (error) {
+            console.error('Error rendering the view: ', error);
+            res.status(500).send('Internal Server Error');
+        }
     }
 };
 
