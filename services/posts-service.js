@@ -70,7 +70,7 @@ async function save(title, content, category) {
 
         const newPost = {
             title: title, 
-            content: content, 
+            content: await parseContent(content), 
             category: category,
             post_id: lastPost ? lastPost.post_id + 1 : 1,
             date: new Date(Date.now())
@@ -90,6 +90,12 @@ async function save(title, content, category) {
     } finally {
         await client.close();
     }
+}
+
+async function parseContent(content) {
+    let result = content.replace(/\r\n/g, '<br>');
+
+    return result;
 }
 
 module.exports = { getLastPosts, getPostById, save };
