@@ -31,12 +31,30 @@
     width: 100px;
 }
 
+#admin-index-section {
+    width: 50%;
+    margin: auto;
+}
+
+#admin-index-section h2, ul {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#admin-index-section h2 {
+    color: #035dc1;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+}
+
 #admin-index-section ul {
     list-style: none;
 }
 
 .admin-menu {
     width: 200px;
+    margin-bottom: 20px;
 }
 
 .admin-menu a {
