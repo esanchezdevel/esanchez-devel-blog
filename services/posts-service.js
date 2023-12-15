@@ -55,7 +55,7 @@ async function getPostById(postId) {
     }
 }
 
-async function save(title, content) {
+async function save(title, content, category) {
     console.log(`Saving new post in database`);
 
     var client;
@@ -71,6 +71,7 @@ async function save(title, content) {
         const newPost = {
             title: title, 
             content: content, 
+            category: category,
             post_id: lastPost ? lastPost.post_id + 1 : 1,
             date: new Date(Date.now())
         };

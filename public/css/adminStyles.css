@@ -94,6 +94,7 @@
 #admin-new-post-section {
     width: 50%;
     margin: auto;
+    height: 100%;
 }
 
 #admin-new-post-section h2, #admin-new-post-section form {
@@ -102,12 +103,25 @@
     margin-right: auto;
 }
 
+#new-post-category select {
+    background: #035dc1;
+    color: white;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
 #admin-new-post-section h2 {
     color: #035dc1;
     padding-bottom: 10px;
     border-bottom: 1px solid lightgrey;
 }
 
-#new-post-title, #new-post-content {
+#admin-new-post-section form {
+    padding-bottom: 150px;
+}
+
+#new-post-title, #new-post-content, #new-post-category {
     margin-bottom: 20px;
 }

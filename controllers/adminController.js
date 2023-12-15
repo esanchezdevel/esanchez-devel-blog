@@ -64,10 +64,10 @@ const adminController = {
     savePost: async (req, res) => {
         console.log(`Saving new post in database`);
 
-        const { title, content } = req.body;
+        const { title, content, category } = req.body;
 
         try {
-            const result = await postsService.save(title, content);
+            const result = await postsService.save(title, content, category);
             console.log(`Insert result: ${result}`);
             if (result) {
                 res.redirect('/admin');
