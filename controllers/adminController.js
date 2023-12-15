@@ -1,5 +1,6 @@
 const siteConfigurationService = require('../services/site-configuration-service');
 const usersService = require('../services/users-service');
+const postsService = require('../services/posts-service');
 
 const adminController = {
     admin: async (req, res) => {
@@ -56,6 +57,26 @@ const adminController = {
             }
         } catch (error) {
             console.error('Error rendering the view: ', error);
+            res.status(500).send('Internal Server Error');
+        }
+    },
+
+    savePost: async (req, res) => {
+        console.log(`Saving new post in database`);
+
+        const { title, content } = req.body;
+
+        try {
+            const result = await postsService.save(title, content);
+            console.log(`Insert result: ${result}`);
+            if (result) {
+                res.redirect('/admin');
+            } else {
+                res.redirect('/admin/post/new');
+            }
+            
+        } catch (error) {
+            console.error('Error saving post in database: ', error);
             res.status(500).send('Internal Server Error');
         }
     }

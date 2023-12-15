@@ -50,10 +50,45 @@ async function getPostById(postId) {
         return post;
     } catch (error) {
         console.error('ERROR obtaining post from database:', error);
-        throw error;
     } finally {
         await client.close();
     }
 }
 
-module.exports = { getLastPosts, getPostById };
+async function save(title, content) {
+    console.log(`Saving new post in database`);
+
+    var client;
+
+    try {
+        client = await dbConnection.connect();
+
+        const database = client.db(DB_NAME);
+        const posts = database.collection(DB_COLLECTION_POSTS);
+
+        const lastPost = await posts.findOne({}, { sort: { post_id: -1 } });
+
+        const newPost = {
+            title: title, 
+            content: content, 
+            post_id: lastPost ? lastPost.post_id + 1 : 1,
+            date: new Date(Date.now())
+        };
+
+        const result = await posts.insertOne(newPost);
+        
+        if (result.insertedId) {
+            console.log(`Post inserted: ${result.insertedId}`);
+            return true;
+        } else {
+            console.log(`Post NOT inserted. Please check it`);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error saving post in database: ', error);
+    } finally {
+        await client.close();
+    }
+}
+
+module.exports = { getLastPosts, getPostById, save };
