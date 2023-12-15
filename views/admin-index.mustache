@@ -1,1 +1,25 @@
-<h1>Bienvenido Admin!!!!</h1>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{{ siteConfiguration.title }}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
+        <link rel="stylesheet" type="text/css" href="/css/adminStyles.css">
+    </head>
+    <body>
+        <main>
+            {{> site-header}}
+            <hr>
+            <section id="admin-index-section">
+                <h2>Admin Panel</h2>
+                <ul>
+                    <li class="admin-menu"><a href="/admin/post/new">Nuevo Post</a></li>
+                </ul>
+            </section>
+            <footer>
+                <p>{{{ siteConfiguration.footer }}}</p>
+            </footer>
+        </main>
+    </body>
+</html>
