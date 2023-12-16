@@ -117,6 +117,10 @@ async function parseContent(content) {
     .replace(/\[color=red\]/g, '<span style="color: red;">')
     .replace(/\[\/color\]/g, '</span>')
 
+    .replace(/\[img="/g, '<img class="post-image" src="')
+    .replace(/"\]/g, '">');
+
+
     return result;
 }
 

@@ -175,3 +175,10 @@ hr {
 #right-aside li {
     padding-bottom: 10px;
 }
+
+.post-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 600px; /* if is bigger than 600px use 600px as width */
+    height: auto;
+}
