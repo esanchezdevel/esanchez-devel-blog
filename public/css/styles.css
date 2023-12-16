@@ -182,3 +182,14 @@ hr {
     max-width: 600px; /* if is bigger than 600px use 600px as width */
     height: auto;
 }
+
+pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    overflow-x: auto;
+}
+
+.custom-code {
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap;
+}
