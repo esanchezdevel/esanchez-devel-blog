@@ -93,29 +93,29 @@ async function save(title, content, category) {
 }
 
 async function parseContent(content) {
-    let result = content.replace(/\r\n/g, '<br>');
+    let result = content.replace(/\r\n/g, '<br>')
 
     // letters
-    result = result.replace(/á/g, '&aacute;');
-    result = result.replace(/é/g, '&eacute;');
-    result = result.replace(/í/g, '&iacute;');
-    result = result.replace(/ó/g, '&oacute;');
-    result = result.replace(/ú/g, '&uacute;');
-    result = result.replace(/Á/g, '&Aacute;');
-    result = result.replace(/É/g, '&Eacute;');
-    result = result.replace(/Í/g, '&Iacute;');
-    result = result.replace(/Ó/g, '&Oacute;');
-    result = result.replace(/Ú/g, '&Uacute;');
-    result = result.replace(/ñ/g, '&ntilde;');
-    result = result.replace(/Ñ/g, '&Ntilde;');
+    .replace(/á/g, '&aacute;')
+    .replace(/é/g, '&eacute;')
+    .replace(/í/g, '&iacute;')
+    .replace(/ó/g, '&oacute;')
+    .replace(/ú/g, '&uacute;')
+    .replace(/Á/g, '&Aacute;')
+    .replace(/É/g, '&Eacute;')
+    .replace(/Í/g, '&Iacute;')
+    .replace(/Ó/g, '&Oacute;')
+    .replace(/Ú/g, '&Uacute;')
+    .replace(/ñ/g, '&ntilde;')
+    .replace(/Ñ/g, '&Ntilde;')
 
     // html tags
-    result = result.replace(/[b]/g, '<b>');
-    result = result.replace(/[/b]/g, '</b>');
-    result = result.replace(/[i]/g, '<i>');
-    result = result.replace(/[/i]/g, '</i>');
-    result = result.replace(/[color=red]/g, '<span style="color: red;">');
-    result = result.replace(/[/color]/g, '</span>');
+    .replace(/\[b\]/g, '<b>')
+    .replace(/\[\/b\]/g, '</b>')
+    .replace(/\[i\]/g, '<i>')
+    .replace(/\[\/i\]/g, '</i>')
+    .replace(/\[color=red\]/g, '<span style="color: red;">')
+    .replace(/\[\/color\]/g, '</span>')
 
     return result;
 }
