@@ -93,7 +93,9 @@ async function save(title, content, category) {
 }
 
 async function parseContent(content) {
-    let result = content.replace(/\r\n/g, '<br>')
+    let result = content.replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\r\n/g, '<br>')
 
     // letters
     .replace(/á/g, '&aacute;')
