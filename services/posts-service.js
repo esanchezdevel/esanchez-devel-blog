@@ -118,9 +118,31 @@ async function parseContent(content) {
     .replace(/\[\/color\]/g, '</span>')
     .replace(/\[img="/g, '<img class="post-image" src="')
     .replace(/"\]/g, '">')
-    .replace(/\[code\]/g, '<code class="custom-code">')
-    .replace(/\[\/code\]/g, '</code>');
+    .replace(/\[code=java\]/g, '<pre><code class="language-java">')
+    .replace(/\[code=css\]/g, '<pre><code class="language-css">')
+    .replace(/\[code=html\]/g, '<pre><code class="language-markup">')
+    .replace(/\[code=javascript\]/g, '<pre><code class="language-javascript">')
+    .replace(/\[\/code\]/g, '</code></pre>');
 
+    result = result.replace(/<code class="language-java">(.*?)<\/code>/gs, (match, group) => {
+        const replaced = group.replace(/<br>/g, '\r\n');
+        return `<code class="language-java">${replaced}</code>`;
+    });
+
+    result = result.replace(/<code class="language-css">(.*?)<\/code>/gs, (match, group) => {
+        const replaced = group.replace(/<br>/g, '\r\n');
+        return `<code class="language-css">${replaced}</code>`;
+    });
+
+    result = result.replace(/<code class="language-markup">(.*?)<\/code>/gs, (match, group) => {
+        const replaced = group.replace(/<br>/g, '\r\n');
+        return `<code class="language-markup">${replaced}</code>`;
+    });
+
+    result = result.replace(/<code class="language-javascript">(.*?)<\/code>/gs, (match, group) => {
+        const replaced = group.replace(/<br>/g, '\r\n');
+        return `<code class="language-java">${replaced}</code>`;
+    });
 
     return result;
 }
