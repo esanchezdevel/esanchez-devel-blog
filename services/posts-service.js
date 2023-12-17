@@ -47,6 +47,8 @@ async function getPostById(postId) {
 
         const post = await posts.findOne({ post_id: parseFloat(postId) });
 
+        post.content = await parseContent(post.content);
+
         return post;
     } catch (error) {
         console.error('ERROR obtaining post from database:', error);
@@ -70,7 +72,7 @@ async function save(title, content, category) {
 
         const newPost = {
             title: title, 
-            content: await parseContent(content), 
+            content: content, 
             category: category,
             post_id: lastPost ? lastPost.post_id + 1 : 1,
             date: new Date(Date.now())
