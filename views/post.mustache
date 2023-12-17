@@ -12,12 +12,27 @@
         <main>
             {{> site-header}}
             <hr>
-            <section id = "post">
-                <article>
-                    <h2>{{{ post.title }}}</h2>
-                    <hr>
-                    <p>{{{ post.content }}}</p>
-                </article>
+            <section id="center-section">
+                <section id = "post">
+                    <article>
+                        <h2>{{{ post.title }}}</h2>
+                        <hr>
+                        <p>{{{ post.content }}}</p>
+                    </article>
+                </section>
+                <section id="comments">
+                    <h2>Comentarios:</h2>
+                    <form action="/comment/new" method="post">
+                        <div id="comment-email">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" size="82" required><br>
+                        </div>
+                            <div id="comment-content">
+                            <textarea id="content" name="content" rows="15" cols="100" required></textarea><br>
+                        </div>
+                        <input type="submit" value="Enviar" class="custom-button">
+                    </form>
+                </section>
             </section>
             {{> menu}}
             <footer>
