@@ -74,11 +74,17 @@ hr {
     margin-top: 10px;
 }
 
-#last-posts {
+#center-section {
     float: left;
     width: 70%;
     height: 100%;
     padding-bottom: 100px;
+}
+
+#last-posts {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 20px;
 }
 
 #last-posts h2, ul {
@@ -94,23 +100,28 @@ hr {
     list-style-type: none;
 }
 
-#last-posts li:nth-child(even) {
+#last-posts ul li:nth-child(even) {
     background: #f3f3f3;
 }
 
-#last-posts li:nth-child(odd) {
+#last-posts ul li:nth-child(odd) {
     background: white;
 }
 
 #last-posts li {
     list-style-type: none;
-    border: 1px solid darkgrey;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    border-bottom: 1px solid darkgrey;
+    margin-top: 0px;
+    margin-bottom: 0px;
     padding-left: 20px;
     padding-right: 20px;
-    box-shadow: 5px 5px 5px black;
+    padding-top: 5px;
+    padding-bottom: 5px;
     line-height: 1.4em;
+}
+
+#last-posts ul li:first-child {
+    border-top: 1px solid darkgrey;
 }
 
 #last-posts li a:link {
@@ -123,10 +134,24 @@ hr {
 
 #last-posts li a h3 {
     color: #035dc1;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-#last-posts li a p {
-    color: black;
+#about-me {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 100px;
+}
+
+#about-me h2, #about-me p {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+#about-me h2 {
+    color: darkgrey;
 }
 
 #post {
