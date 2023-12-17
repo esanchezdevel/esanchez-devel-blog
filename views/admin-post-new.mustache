@@ -28,11 +28,11 @@
                         </select>
                     </div>
                     <div id="new-post-format-buttons">
-                        <button class="custom-button" onclick="addTag('b')">Negrita</button>
-                        <button class="custom-button" onclick="addTag('i')">Cursiva</button>
-                        <button class="custom-button" onclick="addTag('img')">Img</button>
-                        <button class="custom-button" onclick="addTag('color')">Color red</button>
-                        <button class="custom-button" onclick="addTag('code')">Code*</button><br>
+                        <button class="custom-button" onclick="return addTag('b')">Negrita</button>
+                        <button class="custom-button" onclick="return addTag('i')">Cursiva</button>
+                        <button class="custom-button" onclick="return addTag('img')">Img</button>
+                        <button class="custom-button" onclick="return addTag('color')">Color red</button>
+                        <button class="custom-button" onclick="return addTag('code')">Code*</button><br>
                         <p>*Lenguajes disponibles: java, css, html y javascript</p>
                     </div>
                     <div id="new-post-content">
@@ -71,6 +71,7 @@
                 } else if (tag === 'code') {
                     content.value = content.value.slice(0, content.selectionStart) + '[code=java|css|html|javascript][/code]';
                 }
+                return false; // To avoid send the form
             }
         </script>
     </body>
