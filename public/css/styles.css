@@ -16,12 +16,23 @@ footer {
     background: #035dc1;
     color: white;
     padding-top: 10px;
+    z-index: 1; /* is needed to avoid conflicts with prism code blocks */
 }
 
 hr {
     border: none;
     height: 1px;
     background: darkgrey;
+}
+
+.custom-button {
+    background: #035dc1;
+    color: white;
+    font-weight: bold;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px; 
 }
 
 #site-header {
@@ -164,4 +175,11 @@ hr {
 
 #right-aside li {
     padding-bottom: 10px;
+}
+
+.post-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 600px; /* if is bigger than 600px use 600px as width */
+    height: auto;
 }

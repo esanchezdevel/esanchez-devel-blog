@@ -1,9 +1,12 @@
 const express = require('express');
+const session = require('express-session');
 const mustacheExpress = require('mustache-express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const app = express();
-const siteConfigurationService = require('./services/site-configuration-service');
-const postsService = require('./services/posts-service');
+const config = require('./config');
+const adminRoutes = require('./routes/adminRoutes');
+const mainRoutes = require('./routes/mainRoutes');
 
 const port = 4200;
 
@@ -14,37 +17,18 @@ app.set('views', path.join(__dirname, 'views'));
 // configure express to serve files in "public" folder like .css or .js files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', async (req, res) => {
-
-    try {
-        const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
-        const posts = await postsService.getLastPosts();
-        res.render('index', {
-            siteConfiguration: siteConfiguration,
-            posts: posts
-        });
-    } catch (error) {
-        console.error('Error rendering the view:', error);
-        res.status(500).send('Internal Server Error');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({ 
+    secret: config.adminCookieSecret, 
+    resave: true, 
+    saveUninitialized: true, 
+    cookie: {
+        maxAge: 24* 60 * 60 * 1000 // The admin session expires in one day
     }
-});
+}));
 
-app.get('/post/:postId', async (req, res) => {
-
-    console.log(`post received: ${req.params.postId}`);
-
-    try {
-        const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
-        const post = await postsService.getPostById(req.params.postId);
-        res.render('post', {
-            siteConfiguration: siteConfiguration,
-            post: post
-        });
-    } catch (error) {
-        console.error('Error rendering the view:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
+app.use('/', mainRoutes);
+app.use('/admin', adminRoutes);
 
 app.listen(port, () => {
     console.log(`Server listening on port: ${port}`);

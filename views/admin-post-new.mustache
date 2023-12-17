@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{{ siteConfiguration.title }}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
+        <link rel="stylesheet" type="text/css" href="/css/adminStyles.css">
+    </head>
+    <body>
+        <main>
+            {{> site-header}}
+            <hr>
+            <section id="admin-new-post-section">
+                <h2>Admin Panel - Nuevo Post</h2>
+                <form action="/admin/post/new" method="post">
+                    <div id="new-post-title">
+                        <label for="title">T&iacute;tulo:</label>
+                        <input type="text" id="title" name="title" size="93" required><br>
+                    </div>
+                    <div id="new-post-category">
+                        <label for="category">Categor&iacute;a</label>
+                        <select id="category" name="category">
+                            <option value="programacion">Programaci&oacute;n</option>
+                            <option value="baloncesto">Baloncesto</option>
+                            <option value="cine_y_musica">Cine y M&uacute;sica</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </div>
+                    <div id="new-post-format-buttons">
+                        <button class="custom-button" onclick="return addTag('b')">Negrita</button>
+                        <button class="custom-button" onclick="return addTag('i')">Cursiva</button>
+                        <button class="custom-button" onclick="return addTag('img')">Img</button>
+                        <button class="custom-button" onclick="return addTag('color')">Color red</button>
+                        <button class="custom-button" onclick="return addTag('code')">Code*</button><br>
+                        <p>*Lenguajes disponibles: java, css, html y javascript</p>
+                    </div>
+                    <div id="new-post-content">
+                        <textarea id="content" name="content" rows="30" cols="100" required></textarea><br>
+                    </div>
+                    <input type="submit" value="Guardar" class="custom-button">
+                </form>
+            </section>
+            <footer>
+                <p>{{{ siteConfiguration.footer }}}</p>
+            </footer>
+        </main>
+        <script>
+            function addTag(tag) {
+                var content = document.getElementById("content");
+
+                // Check if there is a selected text in the textarea
+                var selectedText = content.value.substring(content.selectionStart, content.selectionEnd);
+                if (tag === 'b' || tag === 'i') {
+                    // Create the text to be added
+                    var textToAdd = selectedText ? '[' + tag + ']' + selectedText + '[/' + tag + ']' : '[' + tag + '][/' + tag + ']';
+
+                    // Insert the text in the textarea
+                    content.value = content.value.slice(0, content.selectionStart) +
+                                    textToAdd +
+                                    content.value.slice(content.selectionEnd);
+                } else if (tag === 'img') {
+                    content.value = content.value.slice(0, content.selectionStart) + '[img=""]';
+                } else if (tag === 'color') {
+                    var textToAdd = selectedText ? '[color=red]' + selectedText + '[/color]' : '[color=red][/color]';
+
+                    // Insert the text in the textarea
+                    content.value = content.value.slice(0, content.selectionStart) +
+                                    textToAdd +
+                                    content.value.slice(content.selectionEnd);
+                } else if (tag === 'code') {
+                    content.value = content.value.slice(0, content.selectionStart) + '[code=java|css|html|javascript][/code]';
+                }
+                return false; // To avoid send the form
+            }
+        </script>
+    </body>
+</html>
