@@ -145,7 +145,7 @@ hr {
     padding-bottom: 100px;
 }
 
-#about-me h2, p {
+#about-me h2, #about-me p {
     padding-left: 100px;
     padding-right: 100px;
 }
