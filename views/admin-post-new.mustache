@@ -28,11 +28,11 @@
                         </select>
                     </div>
                     <div id="new-post-format-buttons">
-                        <button class="custom-button">Negrita</button>
-                        <button class="custom-button">Cursiva</button>
-                        <button class="custom-button">Img</button>
-                        <button class="custom-button">Color red</button>
-                        <button class="custom-button">Code*</button><br>
+                        <button class="custom-button" onclick="addTag('b')">Negrita</button>
+                        <button class="custom-button" onclick="addTag('i')">Cursiva</button>
+                        <button class="custom-button" onclick="addTag('img')">Img</button>
+                        <button class="custom-button" onclick="addTag('color')">Color red</button>
+                        <button class="custom-button" onclick="addTag('code')">Code*</button><br>
                         <p>*Lenguajes disponibles: java, css, html y javascript</p>
                     </div>
                     <div id="new-post-content">
@@ -45,5 +45,33 @@
                 <p>{{{ siteConfiguration.footer }}}</p>
             </footer>
         </main>
+        <script>
+            function addTag(tag) {
+                var content = document.getElementById("content");
+
+                // Check if there is a selected text in the textarea
+                var selectedText = content.value.substring(content.selectionStart, content.selectionEnd);
+                if (tag === 'b' || tag === 'i') {
+                    // Create the text to be added
+                    var textToAdd = selectedText ? '[' + tag + ']' + selectedText + '[/' + tag + ']' : '[' + tag + '][/' + tag + ']';
+
+                    // Insert the text in the textarea
+                    content.value = content.value.slice(0, content.selectionStart) +
+                                    textToAdd +
+                                    content.value.slice(content.selectionEnd);
+                } else if (tag === 'img') {
+                    content.value = content.value.slice(0, content.selectionStart) + '[img=""]';
+                } else if (tag === 'color') {
+                    var textToAdd = selectedText ? '[color=red]' + selectedText + '[/color]' : '[color=red][/color]';
+
+                    // Insert the text in the textarea
+                    content.value = content.value.slice(0, content.selectionStart) +
+                                    textToAdd +
+                                    content.value.slice(content.selectionEnd);
+                } else if (tag === 'code') {
+                    content.value = content.value.slice(0, content.selectionStart) + '[code=java|css|html|javascript][/code]';
+                }
+            }
+        </script>
     </body>
 </html>
