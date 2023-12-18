@@ -94,6 +94,10 @@ async function save(title, content, category) {
     }
 }
 
+async function saveComment(postId, email, content) {
+    return true;
+}
+
 async function parseContent(content) {
     let result = content.replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -157,4 +161,4 @@ async function parseContent(content) {
     return result;
 }
 
-module.exports = { getLastPosts, getPostById, save };
+module.exports = { getLastPosts, getPostById, save, saveComment };
