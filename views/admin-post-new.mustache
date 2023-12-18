@@ -69,7 +69,7 @@
                                     textToAdd +
                                     content.value.slice(content.selectionEnd);
                 } else if (tag === 'code') {
-                    content.value = content.value.slice(0, content.selectionStart) + '[code=java|css|html|javascript][/code]';
+                    content.value = content.value.slice(0, content.selectionStart) + '[code=java|css|html|javascript|bash][/code]';
                 }
                 return false; // To avoid send the form
             }

@@ -126,6 +126,7 @@ async function parseContent(content) {
     .replace(/\[code=css\]/g, '<pre><code class="language-css">')
     .replace(/\[code=html\]/g, '<pre><code class="language-markup">')
     .replace(/\[code=javascript\]/g, '<pre><code class="language-javascript">')
+    .replace(/\[code=bash\]/g, '<pre><code class="language-bash">')
     .replace(/\[\/code\]/g, '</code></pre>');
 
     result = result.replace(/<code class="language-java">(.*?)<\/code>/gs, (match, group) => {
@@ -144,6 +145,11 @@ async function parseContent(content) {
     });
 
     result = result.replace(/<code class="language-javascript">(.*?)<\/code>/gs, (match, group) => {
+        const replaced = group.replace(/<br>/g, '\r\n');
+        return `<code class="language-java">${replaced}</code>`;
+    });
+
+    result = result.replace(/<code class="language-bash">(.*?)<\/code>/gs, (match, group) => {
         const replaced = group.replace(/<br>/g, '\r\n');
         return `<code class="language-java">${replaced}</code>`;
     });
