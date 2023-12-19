@@ -6,38 +6,37 @@ const apiController = {
 
         const postId = jsonRequest.postId;
         const email = jsonRequest.email;
+        const name = jsonRequest.name;
         const content = jsonRequest.content;
 
-        console.log(`saving comment - postId: ${postId}, email: ${email}, content: ${content}`);
-
+        let statusCode;
+        let message;
         try {
-            const result = await postsService.saveComment(postId, email, content);
+            const result = await postsService.saveComment(postId, email, name, content);
             if (result) {
-                const result = {
-                    code: 200,
-                    message: 'success'
-                }
-
-                res.json(result);
-                res.status(200);
+                statusCode = 200;
+                message = 'success';
             } else {
-                const result = {
-                    code: 500,
-                    message: 'Internal server error'
-                }
-                res.json(result);
-                res.status(500);
+                statusCode = 500;
+                message = 'Internal server error. Something happened while trying to save the comment';
             }
+
+            res.json(createJsonResponse(statusCode, message));
+            res.status(statusCode);
         } catch (error) {
             console.error('Error rendering the view:', error);
-            const result = {
-                code: 500,
-                message: 'Internal server error'
-            }
-            res.json(result);
+
+            res.json(createJsonResponse(500, 'Internal server error'));
             res.status(500);
         }
     }
 };
+
+async function createJsonResponse(statusCode, message) {
+    return {
+        code: statusCode,
+        message: message
+    };
+}
 
 module.exports = apiController;

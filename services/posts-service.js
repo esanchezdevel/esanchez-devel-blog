@@ -94,8 +94,41 @@ async function save(title, content, category) {
     }
 }
 
-async function saveComment(postId, email, content) {
-    return true;
+async function saveComment(postId, email, name, content) {
+    var client;
+
+    try {
+        client = await dbConnection.connect();
+
+        const database = client.db(DB_NAME);
+        const posts = database.collection(DB_COLLECTION_POSTS);
+
+        const comment = {
+            email: email,
+            name: name,
+            date: new Date(Date.now()),
+            content: content
+        }
+
+        const result = await posts.updateOne({post_id: postId}, {
+            $push: {
+                comments: comment
+            }
+        });
+
+        if (result.modifiedCount === 1) {
+            console.log(`Comment inserted OK`);
+            return true;
+        } else {
+            console.log(`Commented was not inserted: ${JSON.stringify(result)}`);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error saving post in database: ', error);
+        return false;
+    } finally {
+        await client.close();
+    }
 }
 
 async function parseContent(content) {

@@ -13,6 +13,7 @@
 
                 sendButton.addEventListener("click", function() {
                     var email = document.getElementById("email").value;
+                    var name = document.getElementById("name").value;
                     var content = document.getElementById("content").value;
 
                     // TODO make HTTP request to save the comment
@@ -38,7 +39,11 @@
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" size="82" required><br>
                     </div>
-                        <div id="comment-content">
+                    <div id="comment-name">
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name" name="name" size="82" required><br>
+                    </div>
+                    <div id="comment-content">
                         <textarea id="content" name="content" rows="15" cols="100" required></textarea><br>
                     </div>
                     <button id="send-comment" class="custom-button">Enviar</button>
