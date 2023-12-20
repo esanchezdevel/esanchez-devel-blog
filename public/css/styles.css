@@ -231,11 +231,17 @@ hr {
     margin-bottom: 20px;
 }
 
+#comment-email label, #comment-name label {
+    display: inline-block;
+    width: 75px;
+}
+
 #comments ul {
     list-style: none;
     padding-left: 0px;
     padding-right: 0px;
     width: 100%;
+    margin-bottom: 50px;
 }
 
 #comments ul li {
