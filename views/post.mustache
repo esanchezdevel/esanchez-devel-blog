@@ -15,10 +15,18 @@
                     var email = document.getElementById("email").value;
                     var name = document.getElementById("name").value;
                     var content = document.getElementById("content").value;
-
-                    // TODO make HTTP request to save the comment
+                    var postId = getCurrentPostId();
+                    
+                    console.log(`postId: ${postId}`);
                 });
             });
+
+            function getCurrentPostId() {
+                    var url = new URL(window.location.href);
+
+                    var pathArray = url.pathname.split('/');
+                    return pathArray.pop();
+            }
         </script>
     </head>
     <body>
