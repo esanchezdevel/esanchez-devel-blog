@@ -50,9 +50,11 @@ async function getPostById(postId) {
 
         post.content = await parseContent(post.content);
 
-        post.comments.forEach(comment => {
+        post.comments.forEach(async comment => {
             const modifiedDate = moment(comment.date).format('DD-MM-YYYY HH:mm[h]');
             comment.date = modifiedDate;
+            
+            comment.content = await parseContent(comment.content);
         });
             
 
@@ -143,6 +145,7 @@ async function parseContent(content) {
     let result = content.replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/\r\n/g, '<br>')
+    .replace(/\n/g, '<br>')
 
     // letters
     .replace(/á/g, '&aacute;')

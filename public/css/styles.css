@@ -181,7 +181,7 @@ hr {
 }
 
 #comments {
-    width: 100%;
+    width: 80%;
     height: 100%;
     padding-bottom: 100px;
 }
@@ -192,7 +192,7 @@ hr {
     padding-left: 20px;
     padding-right: 20px;
     margin-left: 100px;
-    margin-right: 100px;
+    margin-right: 0px;
 }
 
 #comments h2 {
@@ -229,4 +229,20 @@ hr {
 
 #comment-email, #comment-content, #comment-name {
     margin-bottom: 20px;
+}
+
+#comments ul {
+    list-style: none;
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+}
+
+#comments ul li {
+    border-bottom: 1px solid darkgrey;
+}
+
+.comments-data {
+    color: darkgrey;
+    font-size: 15px;
 }
