@@ -66,6 +66,17 @@
                 </section>
                 <section id="comments">
                     <h2>Comentarios:</h2>
+                    <ul>
+                    {{ #post.comments }}
+                        <li>
+                            <article>
+                                <p>{{{ content }}}</p>
+                                <p>Publicado por {{{ name }}} el {{{ date }}}</p>                            
+                            </article>
+                        </li>
+                    {{/post.comments}}
+                    </ul>
+
                     <div id="comment-email">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" size="82" required><br>

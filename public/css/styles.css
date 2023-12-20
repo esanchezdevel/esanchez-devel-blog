@@ -227,6 +227,6 @@ hr {
     height: auto;
 }
 
-#comment-email, #comment-content {
+#comment-email, #comment-content, #comment-name {
     margin-bottom: 20px;
 }

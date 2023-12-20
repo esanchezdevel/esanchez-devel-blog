@@ -1,3 +1,4 @@
+const moment = require('moment');
 const dbConnection = require('./db-connection');
 const { DB_NAME, DB_COLLECTION_POSTS } = require('../utils/constants');
 
@@ -48,6 +49,13 @@ async function getPostById(postId) {
         const post = await posts.findOne({ post_id: parseFloat(postId) });
 
         post.content = await parseContent(post.content);
+
+        post.comments.forEach(comment => {
+            const modifiedDate = moment(comment.date).format('DD-MM-YYYY HH:mm[h]');
+            comment.date = modifiedDate;
+        });
+            
+
 
         return post;
     } catch (error) {
