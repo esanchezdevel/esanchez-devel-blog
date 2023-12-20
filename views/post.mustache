@@ -17,7 +17,30 @@
                     var content = document.getElementById("content").value;
                     var postId = getCurrentPostId();
                     
-                    console.log(`postId: ${postId}`);
+                    var request = {
+                        email: email,
+                        name: name,
+                        content: content,
+                        postId: postId
+                    };
+
+                    var requestOptions = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(request)
+                    }
+
+                    fetch ('/api/comment/save', requestOptions)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(`response: ${JSON.stringify(data)}`);
+                        })
+                        .catch(error => {
+                            console.log(`Error saving comment: ${error}`);
+                        });
                 });
             });
 

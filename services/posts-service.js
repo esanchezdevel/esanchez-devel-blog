@@ -110,7 +110,7 @@ async function saveComment(postId, email, name, content) {
             content: content
         }
 
-        const result = await posts.updateOne({post_id: postId}, {
+        const result = await posts.updateOne({post_id: parseInt(postId)}, {
             $push: {
                 comments: comment
             }
@@ -120,7 +120,7 @@ async function saveComment(postId, email, name, content) {
             console.log(`Comment inserted OK`);
             return true;
         } else {
-            console.log(`Commented was not inserted: ${JSON.stringify(result)}`);
+            console.log(`Comment was not inserted: ${JSON.stringify(result)}`);
             return false;
         }
     } catch (error) {

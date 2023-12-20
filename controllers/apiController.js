@@ -21,12 +21,12 @@ const apiController = {
                 message = 'Internal server error. Something happened while trying to save the comment';
             }
 
-            res.json(createJsonResponse(statusCode, message));
+            res.json(await createJsonResponse(statusCode, message));
             res.status(statusCode);
         } catch (error) {
             console.error('Error rendering the view:', error);
 
-            res.json(createJsonResponse(500, 'Internal server error'));
+            res.json(await createJsonResponse(500, 'Internal server error'));
             res.status(500);
         }
     }
