@@ -41,15 +41,11 @@
                             var formContent = document.getElementById("content").value;
                             var formName = document.getElementById("name").value;
 
-                            var date = new Date();
-                            var formatedDate = date.toISOString().slice(0, 16).replace("T", " ");
-
-
                             var newComment = document.createElement("li");
 
                             newComment.innerHTML = `<article>
                                                     <p class="comments-content">${formContent}</p>
-                                                    <p class="comments-data">Publicado por ${formName} el ${formatedDate}h</p>
+                                                    <p class="comments-data">Publicado por ${formName} ahora</p>
                                                 </article>`;
 
                             var commentsList = document.getElementById("comments-list");
