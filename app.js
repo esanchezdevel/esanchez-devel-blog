@@ -5,8 +5,11 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
 const config = require('./config');
+
+// Routes
 const adminRoutes = require('./routes/adminRoutes');
 const mainRoutes = require('./routes/mainRoutes');
+const apiRoutes = require('./routes/apiRoutes');
 
 const port = 4200;
 
@@ -29,6 +32,7 @@ app.use(session({
 
 app.use('/', mainRoutes);
 app.use('/admin', adminRoutes);
+app.use('/api', apiRoutes);
 
 app.listen(port, () => {
     console.log(`Server listening on port: ${port}`);

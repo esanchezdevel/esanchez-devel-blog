@@ -1,3 +1,4 @@
+const moment = require('moment');
 const dbConnection = require('./db-connection');
 const { DB_NAME, DB_COLLECTION_POSTS } = require('../utils/constants');
 
@@ -49,6 +50,15 @@ async function getPostById(postId) {
 
         post.content = await parseContent(post.content);
 
+        post.comments.forEach(async comment => {
+            const modifiedDate = moment(comment.date).format('DD-MM-YYYY HH:mm[h]');
+            comment.date = modifiedDate;
+            
+            comment.content = await parseContent(comment.content);
+        });
+            
+
+
         return post;
     } catch (error) {
         console.error('ERROR obtaining post from database:', error);
@@ -94,10 +104,48 @@ async function save(title, content, category) {
     }
 }
 
+async function saveComment(postId, email, name, content) {
+    var client;
+
+    try {
+        client = await dbConnection.connect();
+
+        const database = client.db(DB_NAME);
+        const posts = database.collection(DB_COLLECTION_POSTS);
+
+        const comment = {
+            email: email,
+            name: name,
+            date: new Date(Date.now()),
+            content: content
+        }
+
+        const result = await posts.updateOne({post_id: parseInt(postId)}, {
+            $push: {
+                comments: comment
+            }
+        });
+
+        if (result.modifiedCount === 1) {
+            console.log(`Comment inserted OK`);
+            return true;
+        } else {
+            console.log(`Comment was not inserted: ${JSON.stringify(result)}`);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error saving post in database: ', error);
+        return false;
+    } finally {
+        await client.close();
+    }
+}
+
 async function parseContent(content) {
     let result = content.replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/\r\n/g, '<br>')
+    .replace(/\n/g, '<br>')
 
     // letters
     .replace(/á/g, '&aacute;')
@@ -126,6 +174,7 @@ async function parseContent(content) {
     .replace(/\[code=css\]/g, '<pre><code class="language-css">')
     .replace(/\[code=html\]/g, '<pre><code class="language-markup">')
     .replace(/\[code=javascript\]/g, '<pre><code class="language-javascript">')
+    .replace(/\[code=bash\]/g, '<pre><code class="language-bash">')
     .replace(/\[\/code\]/g, '</code></pre>');
 
     result = result.replace(/<code class="language-java">(.*?)<\/code>/gs, (match, group) => {
@@ -148,7 +197,12 @@ async function parseContent(content) {
         return `<code class="language-java">${replaced}</code>`;
     });
 
+    result = result.replace(/<code class="language-bash">(.*?)<\/code>/gs, (match, group) => {
+        const replaced = group.replace(/<br>/g, '\r\n');
+        return `<code class="language-java">${replaced}</code>`;
+    });
+
     return result;
 }
 
-module.exports = { getLastPosts, getPostById, save };
+module.exports = { getLastPosts, getPostById, save, saveComment };
