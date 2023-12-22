@@ -44,7 +44,7 @@
                             var newComment = document.createElement("li");
 
                             newComment.innerHTML = `<article>
-                                                    <p class="comments-content">${formContent}</p>
+                                                    <p class="comments-content">${parseContent(formContent)}</p>
                                                     <p class="comments-data">Publicado por ${formName} ahora</p>
                                                 </article>`;
 
@@ -66,6 +66,70 @@
 
                     var pathArray = url.pathname.split('/');
                     return pathArray.pop();
+            }
+
+            function parseContent(content) {
+                let result = content.replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\r\n/g, '<br>')
+                .replace(/\n/g, '<br>')
+
+                // letters
+                .replace(/á/g, '&aacute;')
+                .replace(/é/g, '&eacute;')
+                .replace(/í/g, '&iacute;')
+                .replace(/ó/g, '&oacute;')
+                .replace(/ú/g, '&uacute;')
+                .replace(/Á/g, '&Aacute;')
+                .replace(/É/g, '&Eacute;')
+                .replace(/Í/g, '&Iacute;')
+                .replace(/Ó/g, '&Oacute;')
+                .replace(/Ú/g, '&Uacute;')
+                .replace(/ñ/g, '&ntilde;')
+                .replace(/Ñ/g, '&Ntilde;')
+
+                // html tags
+                .replace(/\[b\]/g, '<b>')
+                .replace(/\[\/b\]/g, '</b>')
+                .replace(/\[i\]/g, '<i>')
+                .replace(/\[\/i\]/g, '</i>')
+                .replace(/\[color=red\]/g, '<span style="color: red;">')
+                .replace(/\[\/color\]/g, '</span>')
+                .replace(/\[img="/g, '<img class="post-image" src="')
+                .replace(/"\]/g, '">')
+                .replace(/\[code=java\]/g, '<pre><code class="language-java">')
+                .replace(/\[code=css\]/g, '<pre><code class="language-css">')
+                .replace(/\[code=html\]/g, '<pre><code class="language-markup">')
+                .replace(/\[code=javascript\]/g, '<pre><code class="language-javascript">')
+                .replace(/\[code=bash\]/g, '<pre><code class="language-bash">')
+                .replace(/\[\/code\]/g, '</code></pre>');
+
+                result = result.replace(/<code class="language-java">(.*?)<\/code>/gs, (match, group) => {
+                    const replaced = group.replace(/<br>/g, '\r\n');
+                    return `<code class="language-java">${replaced}</code>`;
+                });
+
+                result = result.replace(/<code class="language-css">(.*?)<\/code>/gs, (match, group) => {
+                    const replaced = group.replace(/<br>/g, '\r\n');
+                    return `<code class="language-css">${replaced}</code>`;
+                });
+
+                result = result.replace(/<code class="language-markup">(.*?)<\/code>/gs, (match, group) => {
+                    const replaced = group.replace(/<br>/g, '\r\n');
+                    return `<code class="language-markup">${replaced}</code>`;
+                });
+
+                result = result.replace(/<code class="language-javascript">(.*?)<\/code>/gs, (match, group) => {
+                    const replaced = group.replace(/<br>/g, '\r\n');
+                    return `<code class="language-java">${replaced}</code>`;
+                });
+
+                result = result.replace(/<code class="language-bash">(.*?)<\/code>/gs, (match, group) => {
+                    const replaced = group.replace(/<br>/g, '\r\n');
+                    return `<code class="language-java">${replaced}</code>`;
+                });
+
+                return result;
             }
         </script>
     </head>
