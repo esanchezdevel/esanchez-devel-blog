@@ -37,6 +37,27 @@
                         .then(response => response.json())
                         .then(data => {
                             console.log(`response: ${JSON.stringify(data)}`);
+
+                            var formContent = document.getElementById("content").value;
+                            var formName = document.getElementById("name").value;
+
+                            var date = new Date();
+                            var formatedDate = date.toISOString().slice(0, 16).replace("T", " ");
+
+
+                            var newComment = document.createElement("li");
+
+                            newComment.innerHTML = `<article>
+                                                    <p class="comments-content">${formContent}</p>
+                                                    <p class="comments-data">Publicado por ${formName} el ${formatedDate}h</p>
+                                                </article>`;
+
+                            var commentsList = document.getElementById("comments-list");
+                            commentsList.append(newComment);
+
+                            document.getElementById("email").value = "";
+                            document.getElementById("name").value = "";
+                            document.getElementById("content").value = "";
                         })
                         .catch(error => {
                             console.log(`Error saving comment: ${error}`);
@@ -66,7 +87,7 @@
                 </section>
                 <section id="comments">
                     <h2>Comentarios:</h2>
-                    <ul>
+                    <ul id="comments-list">
                     {{ #post.comments }}
                         <li>
                             <article>
