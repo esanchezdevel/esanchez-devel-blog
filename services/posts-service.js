@@ -67,6 +67,34 @@ async function getPostById(postId) {
     }
 }
 
+async function getPostsByCategory(category) {
+    console.log(`getting posts of category ${category}`);
+
+    var client;
+
+    try {
+        client = await dbConnection.connect();
+
+        const database = client.db(DB_NAME);
+        const posts = database.collection(DB_COLLECTION_POSTS);
+
+        const cursor = posts.find({category: category}).sort({date: -1});
+        const data = await cursor.toArray();
+
+        // add each config to the result array
+        const result = [];
+        data.forEach(post => {
+            result.push(post);
+        });
+        return result;
+    } catch (error) {
+        console.error('ERROR obtaining posts from database:', error);
+        throw error;
+    } finally {
+        await client.close();
+    }
+}
+
 async function save(title, content, category) {
     console.log(`Saving new post in database`);
 
@@ -205,4 +233,4 @@ async function parseContent(content) {
     return result;
 }
 
-module.exports = { getLastPosts, getPostById, save, saveComment };
+module.exports = { getLastPosts, getPostById, getPostsByCategory, save, saveComment };

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{{ siteConfiguration.title }}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    </head>
+    <body>
+        <main>
+            {{> site-header}}
+            <hr>
+            <section id="center-section">
+                <section id="last-posts">
+                    <h2>Art&iacute;culos:</h2>
+                    <ul>
+                    {{ #posts }}
+                        <li>
+                            <a href="/post/{{ post_id }}">
+                                <h3>- {{{ title }}}</h3>
+                            </a>
+                        </li>
+                    {{/posts}}
+                    </ul>
+                </section>
+            </section>
+            {{> menu}}
+            <footer>
+                <p>{{{ siteConfiguration.footer }}}</p>
+            </footer>
+        </main>
+    </body>
+</html>
