@@ -220,6 +220,26 @@ hr {
     padding-bottom: 10px;
 }
 
+#right-aside a:link {
+    text-decoration: none;
+    color: black;
+}
+
+#right-aside a:active {
+    text-decoration: none;
+    color: black;
+}
+
+#right-aside a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+#right-aside a:hover {
+    text-decoration: none;
+    color: #035dc1;
+}
+
 .post-image {
     display: block;
     margin: 0 auto;
