@@ -29,7 +29,6 @@ async function getLastPosts() {
         return result;
     } catch (error) {
         console.error('ERROR obtaining posts from database:', error);
-        throw error;
     } finally {
         await client.close();
     }
@@ -50,18 +49,45 @@ async function getPostById(postId) {
 
         post.content = await parseContent(post.content);
 
-        post.comments.forEach(async comment => {
-            const modifiedDate = moment(comment.date).format('DD-MM-YYYY HH:mm[h]');
-            comment.date = modifiedDate;
-            
-            comment.content = await parseContent(comment.content);
-        });
-            
-
+        if (post.comments) {
+            post.comments.forEach(async comment => {
+                const modifiedDate = moment(comment.date).format('DD-MM-YYYY HH:mm[h]');
+                comment.date = modifiedDate;
+                
+                comment.content = await parseContent(comment.content);
+            });
+        }
 
         return post;
     } catch (error) {
         console.error('ERROR obtaining post from database:', error);
+    } finally {
+        await client.close();
+    }
+}
+
+async function getAllPosts() {
+    console.log(`getting all posts`);
+
+    var client;
+
+    try {
+        client = await dbConnection.connect();
+
+        const database = client.db(DB_NAME);
+        const posts = database.collection(DB_COLLECTION_POSTS);
+
+        const cursor = posts.find().sort({date: -1});
+        const data = await cursor.toArray();
+
+        // add each config to the result array
+        const result = [];
+        data.forEach(post => {
+            result.push(post);
+        });
+        return result;
+    } catch (error) {
+        console.error('ERROR obtaining posts from database:', error);
     } finally {
         await client.close();
     }
@@ -89,7 +115,6 @@ async function getPostsByCategory(category) {
         return result;
     } catch (error) {
         console.error('ERROR obtaining posts from database:', error);
-        throw error;
     } finally {
         await client.close();
     }
@@ -233,4 +258,4 @@ async function parseContent(content) {
     return result;
 }
 
-module.exports = { getLastPosts, getPostById, getPostsByCategory, save, saveComment };
+module.exports = { getLastPosts, getPostById, getAllPosts, getPostsByCategory, save, saveComment };

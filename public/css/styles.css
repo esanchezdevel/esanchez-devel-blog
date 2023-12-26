@@ -139,6 +139,36 @@ hr {
     margin-bottom: 5px;
 }
 
+#show-all-link {
+    font-weight: bold;
+}
+
+#show-all-link-div {
+    text-align: right;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+#show-all-link:link {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#show-all-link:visited {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#show-all-link:active {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#show-all-link:hover {
+    text-decoration: none;
+    color: #035dc1;
+}
+
 #about-me {
     width: 100%;
     height: 100%;
