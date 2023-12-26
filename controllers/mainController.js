@@ -46,7 +46,23 @@ const mainController = {
             console.error('Error rendering the view:', error);
             res.status(500).send('Internal Server Error');
         }
-    }
+    },
+
+    getAllPosts: async (req, res) => {
+        console.log(`Get all posts`);
+
+        try {
+            const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
+            const posts = await postsService.getAllPosts();
+            res.render('posts-list', {
+                siteConfiguration: siteConfiguration,
+                posts: posts
+            });
+        } catch (error) {
+            console.error('Error rendering the view:', error);
+            res.status(500).send('Internal Server Error');
+        }
+    },
 };
 
 module.exports = mainController;
