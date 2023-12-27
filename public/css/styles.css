@@ -411,4 +411,19 @@ hr {
         padding-left: 10px;
         padding-right: 10px;
     }
+    
+    #post article {
+        margin-left: 10px;
+        margin-right: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    #post h2 {
+        font-size: 18px;
+    }
+
+    #post p {
+        font-size: 15px;
+    }
 }
