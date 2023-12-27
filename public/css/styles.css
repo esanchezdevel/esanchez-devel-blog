@@ -426,4 +426,35 @@ hr {
     #post p {
         font-size: 15px;
     }
+
+    #comments {
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-left: 0px;
+        margin-right: 0px;
+        width: 100%;
+    }
+
+    #comments h2 {
+        font-size: 20px;
+        margin-left: 10px;
+    }
+
+    #comments p {
+        font-size: 15px;
+    }
+
+    #comments ul li {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    #comment-content textarea, #comment-name input, #comment-email input {
+        width: 350px;
+    }
+
+    #comment-content, #comment-name, #comment-email, #send-comment {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 }
