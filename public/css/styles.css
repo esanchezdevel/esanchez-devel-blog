@@ -427,6 +427,10 @@ hr {
         font-size: 15px;
     }
 
+    .post-image {
+        max-width: 300px;
+      }
+
     #comments {
         padding-left: 0px;
         padding-right: 0px;
@@ -456,5 +460,11 @@ hr {
     #comment-content, #comment-name, #comment-email, #send-comment {
         margin-left: 10px;
         margin-right: 10px;
+    }
+}
+
+@media only screen and (max-width: 360px) { 
+    #comment-content textarea, #comment-name input, #comment-email input {
+        width: 300px;
     }
 }
