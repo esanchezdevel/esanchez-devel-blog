@@ -302,3 +302,92 @@ hr {
     color: darkgrey;
     font-size: 15px;
 }
+
+/* Responsive styles */
+@media only screen and (max-width: 768px) {
+    #site-header {
+        margin-left: 10px;
+        padding-top: 20px;
+        padding-bottom: 5px;
+    }
+    
+    #site-header a:link {
+        text-decoration: none;
+        color: #035dc1;
+    }
+    
+    #site-header a:active {
+        text-decoration: none;
+        color: #035dc1;
+    }
+    
+    #site-header a:visited {
+        text-decoration: none;
+        color: #035dc1;
+    }
+    
+    #site-header a:hover {
+        text-decoration: none;
+        color: #035dc1;
+    }
+    
+    #site-header h1 {
+        font-size: 28px;
+        margin-bottom: 10px;
+        margin-top: 5px;
+        text-shadow: 2px 2px 2px darkgrey;
+    }
+    
+    #site-header p {
+        font-size: 15px;
+        color: darkgrey;
+        margin-top: 10px;
+    }
+
+    #right-aside {
+        visibility: hidden;
+    }
+
+    #center-section {
+        width: 100%;
+    }
+
+    #last-posts {
+        width: 100%;
+    }
+
+    #last-posts h2, ul {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    #last-posts h2 {
+        font-size: 20px;
+    }
+
+    #last-posts li {
+        list-style-type: none;
+        border-bottom: 1px solid darkgrey;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        line-height: 1.4em;
+    }
+
+    #last-posts li a h3 {
+        color: #035dc1;
+        font-size: 12px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    #show-all-link-div {
+        text-align: right;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 12px;
+    }
+}
