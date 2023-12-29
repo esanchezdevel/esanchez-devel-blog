@@ -1,5 +1,5 @@
 //Database constants
-const DB_NAME = 'test';
+const DB_NAME = 'blog';
 const DB_COLLECTION_SITE_CONFIGURATIONS = 'siteConfigurations';
 const DB_COLLECTION_POSTS = 'posts';
 const DB_COLLECTION_USERS = 'users';
