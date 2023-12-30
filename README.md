@@ -12,7 +12,7 @@
     - `$ docker volume create esanchez-devel-blog-data`
 
 - Run the mongo server:
-    - `$ docker run -d --name mongodb-server -p 27017:27017 --network esanchez-devel-blog -v esanchez-devel-blog-data:/data/db -e MONGO_INITDB_ROOT_USERNAME="your_user" -e MONGO_INITDB_ROOT_PASSWORD="your_password" mongo:latest`
+    - `$ docker run -d --restart always --name mongodb-server -p 27017:27017 --network esanchez-devel-blog -v esanchez-devel-blog-data:/data/db -e MONGO_INITDB_ROOT_USERNAME="your_user" -e MONGO_INITDB_ROOT_PASSWORD="your_password" mongo:latest`
 
 ### Tools:
 1. bcrypt generator:
