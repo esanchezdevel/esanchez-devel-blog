@@ -1,13 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>{{ title }}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{{ siteConfiguration.title }}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
     </head>
     <body>
         <main>
-            <header>
-                <h1>{{ title }}</h1>
-            </header>
+            {{> site-header}}
+            <hr>
+            <section id="center-section">
+                <section id="last-posts">
+                    <h2>&Uacute;ltimas novedades:</h2>
+                    <ul>
+                    {{ #posts }}
+                        <li>
+                            <a href="/post/{{ post_id }}">
+                                <h3>- {{{ title }}}</h3>
+                            </a>
+                        </li>
+                    {{/posts}}
+                    </ul>
+                    <div id="show-all-link-div">
+                        <a href="/post" id="show-all-link">Ver todos >></a>
+                    </div>
+                </section>
+                <section id="about-me">
+                    <article>
+                        <h2>Acerca de mi</h2>
+                        <p>
+                        Bienvenido a "El rinc&oacute;n de Kike", un rinc&oacute;n que me gustar&iacute;a usar tanto para 
+                        mostrar cosas &uacute;tiles del mundo de la programaci&oacute;n en general, como para compartir 
+                        mis pensamientos acerca de varios temas que a mi personalmente me resultan de inter&eacute;s, como son 
+                        el Baloncesto, la M&uacute;sica, el Cine etc...
+                        </p>
+                        <p>
+                        Este blog se ha programado utilizando las siguientes tecnolog&iacute;as: html5, css3, nodejs, mongodb 
+                        y AWS para alojarlo en la red y que pueda ser accesible a todo el mundo.<br>
+                        La idea de crear este blog fue la de poder practicar la programaci&oacute;n en nodejs y mongodb, 
+                        as&iacute; como poder usarlo como un lugar centralizado en el cual pueda colgar los diferentes proyectos
+                        que pueda realizar en el futuro.
+                        </p>
+                    </article>
+                </section>
+            </section>
+            {{> menu}}
+            <footer>
+                <p>{{{ siteConfiguration.footer }}}</p>
+            </footer>
         </main>
     </body>
 </html>

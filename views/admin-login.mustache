@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="robots" content="nofollow">
+        <title>{{{ siteConfiguration.title }}}</title>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
+        <link rel="stylesheet" type="text/css" href="/css/adminStyles.css">
+    </head>
+    <body>
+        <main>
+            {{> site-header}}
+            <hr>
+            <section id="login-section">
+                <h2>Login</h2>
+                <form action="/admin/login" method="post">
+                    <div id="login-username">
+                        <label for="username">Usuario:</label>
+                        <input type="text" id="username" name="username" required><br>
+                    </div>
+                    <div id="login-password">
+                        <label for="password">Contrase&ntilde;a:</label>
+                        <input type="password" id="password" name="password" required><br>
+                    </div>
+                    <input type="submit" value="Login" class="custom-button">
+                </form>
+            </section>
+            <footer>
+                <p>{{{ siteConfiguration.footer }}}</p>
+            </footer>
+        </main>
+    </body>
+</html>

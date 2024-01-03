@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{{ post.title }}}</title>
+        <script src="/js/prism.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
+        <link rel="stylesheet" type="text/css" href="/css/prism.css">
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var sendButton = document.getElementById("send-comment");
+
+                sendButton.addEventListener("click", function() {
+                    var email = document.getElementById("email").value;
+                    var name = document.getElementById("name").value;
+                    var content = document.getElementById("content").value;
+                    var postId = getCurrentPostId();
+                    
+                    var request = {
+                        email: email,
+                        name: name,
+                        content: content,
+                        postId: postId
+                    };
+
+                    var requestOptions = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(request)
+                    }
+
+                    fetch ('/api/comment/save', requestOptions)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(`response: ${JSON.stringify(data)}`);
+
+                            var formContent = document.getElementById("content").value;
+                            var formName = document.getElementById("name").value;
+
+                            var newComment = document.createElement("li");
+
+                            newComment.innerHTML = `<article>
+                                                    <p class="comments-content">${parseContent(formContent)}</p>
+                                                    <p class="comments-data">Publicado por ${formName} ahora</p>
+                                                </article>`;
+
+                            var commentsList = document.getElementById("comments-list");
+                            commentsList.append(newComment);
+
+                            document.getElementById("email").value = "";
+                            document.getElementById("name").value = "";
+                            document.getElementById("content").value = "";
+                        })
+                        .catch(error => {
+                            console.log(`Error saving comment: ${error}`);
+                        });
+                });
+            });
+
+            function getCurrentPostId() {
+                    var url = new URL(window.location.href);
+
+                    var pathArray = url.pathname.split('/');
+                    return pathArray.pop();
+            }
+
+            function parseContent(content) {
+                let result = content.replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\r\n/g, '<br>')
+                .replace(/\n/g, '<br>')
+
+                // letters
+                .replace(/á/g, '&aacute;')
+                .replace(/é/g, '&eacute;')
+                .replace(/í/g, '&iacute;')
+                .replace(/ó/g, '&oacute;')
+                .replace(/ú/g, '&uacute;')
+                .replace(/Á/g, '&Aacute;')
+                .replace(/É/g, '&Eacute;')
+                .replace(/Í/g, '&Iacute;')
+                .replace(/Ó/g, '&Oacute;')
+                .replace(/Ú/g, '&Uacute;')
+                .replace(/ñ/g, '&ntilde;')
+                .replace(/Ñ/g, '&Ntilde;')
+
+                // html tags
+                .replace(/\[b\]/g, '<b>')
+                .replace(/\[\/b\]/g, '</b>')
+                .replace(/\[i\]/g, '<i>')
+                .replace(/\[\/i\]/g, '</i>')
+                .replace(/\[color=red\]/g, '<span style="color: red;">')
+                .replace(/\[\/color\]/g, '</span>')
+                .replace(/\[img="/g, '<img class="post-image" src="')
+                .replace(/"\]/g, '">')
+                .replace(/\[code=java\]/g, '<pre><code class="language-java">')
+                .replace(/\[code=css\]/g, '<pre><code class="language-css">')
+                .replace(/\[code=html\]/g, '<pre><code class="language-markup">')
+                .replace(/\[code=javascript\]/g, '<pre><code class="language-javascript">')
+                .replace(/\[code=bash\]/g, '<pre><code class="language-bash">')
+                .replace(/\[\/code\]/g, '</code></pre>');
+
+                result = result.replace(/<code class="language-java">(.*?)<\/code>/gs, (match, group) => {
+                    const replaced = group.replace(/<br>/g, '\r\n');
+                    return `<code class="language-java">${replaced}</code>`;
+                });
+
+                result = result.replace(/<code class="language-css">(.*?)<\/code>/gs, (match, group) => {
+                    const replaced = group.replace(/<br>/g, '\r\n');
+                    return `<code class="language-css">${replaced}</code>`;
+                });
+
+                result = result.replace(/<code class="language-markup">(.*?)<\/code>/gs, (match, group) => {
+                    const replaced = group.replace(/<br>/g, '\r\n');
+                    return `<code class="language-markup">${replaced}</code>`;
+                });
+
+                result = result.replace(/<code class="language-javascript">(.*?)<\/code>/gs, (match, group) => {
+                    const replaced = group.replace(/<br>/g, '\r\n');
+                    return `<code class="language-java">${replaced}</code>`;
+                });
+
+                result = result.replace(/<code class="language-bash">(.*?)<\/code>/gs, (match, group) => {
+                    const replaced = group.replace(/<br>/g, '\r\n');
+                    return `<code class="language-java">${replaced}</code>`;
+                });
+
+                return result;
+            }
+        </script>
+    </head>
+    <body>
+        <main>
+            {{> site-header}}
+            <hr>
+            <section id="center-section">
+                <section id = "post">
+                    <article>
+                        <h2>{{{ post.title }}}</h2>
+                        <hr>
+                        <p>{{{ post.content }}}</p>
+                    </article>
+                </section>
+                <section id="comments">
+                    <h2>Comentarios:</h2>
+                    <ul id="comments-list">
+                    {{ #post.comments }}
+                        <li>
+                            <article>
+                                <p class="comments-content">{{{ content }}}</p>
+                                <p class="comments-data">Publicado por {{{ name }}} el {{{ date }}}</p>
+                            </article>
+                        </li>
+                    {{/post.comments}}
+                    </ul>
+
+                    <div id="comment-email">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" size="79" required><br>
+                    </div>
+                    <div id="comment-name">
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name" name="name" size="79" required><br>
+                    </div>
+                    <div id="comment-content">
+                        <textarea id="content" name="content" rows="15" cols="100" required></textarea><br>
+                    </div>
+                    <button id="send-comment" class="custom-button">Enviar</button>
+                </section>
+            </section>
+            {{> menu}}
+            <footer>
+                <p>{{{ siteConfiguration.footer }}}</p>
+            </footer>
+        </main>
+    </body>
+</html>

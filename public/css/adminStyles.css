@@ -1,0 +1,127 @@
+#login-section {
+    width: 50%;
+    margin: auto;
+}
+
+#login-section h2, form {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login-section h2  {
+    color: #035dc1;
+}
+
+#login-username {
+    margin-bottom: 10px;
+}
+
+#login-password {
+    margin-bottom: 10px;
+}
+
+#login-username label{
+    display:inline-block;
+    width: 100px;
+}
+
+#login-password label{
+    display:inline-block;
+    width: 100px;
+}
+
+#admin-index-section {
+    width: 50%;
+    margin: auto;
+}
+
+#admin-index-section h2, ul {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#admin-index-section h2 {
+    color: #035dc1;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+}
+
+#admin-index-section ul {
+    list-style: none;
+}
+
+.admin-menu {
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.admin-menu a {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-shadow: 5px 5px 5px black;
+}
+
+.admin-menu a:link {
+    text-decoration: none;
+    background: #035dc1;
+    color: white;
+}
+
+.admin-menu a:active {
+    text-decoration: none;
+    background: #035dc1;
+    color: white;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.admin-menu a:visited {
+    text-decoration: none;
+    background: #035dc1;
+    color: white;
+}
+
+.admin-menu a:hover {
+    text-decoration: none;
+    background: #035dc1;
+    color: white;
+}
+
+#admin-new-post-section {
+    width: 50%;
+    margin: auto;
+    height: 100%;
+}
+
+#admin-new-post-section h2, #admin-new-post-section form {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#new-post-category select {
+    background: #035dc1;
+    color: white;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+#admin-new-post-section h2 {
+    color: #035dc1;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+}
+
+#admin-new-post-section form {
+    padding-bottom: 150px;
+}
+
+#new-post-title, #new-post-content, #new-post-category, #new-post-format-buttons {
+    margin-bottom: 20px;
+}
