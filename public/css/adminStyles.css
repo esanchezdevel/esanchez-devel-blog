@@ -122,6 +122,6 @@
     padding-bottom: 150px;
 }
 
-#new-post-title, #new-post-content, #new-post-category, #new-post-format-buttons {
+#new-post-title, #new-post-description, #new-post-content, #new-post-category, #new-post-format-buttons {
     margin-bottom: 20px;
 }
