@@ -120,7 +120,7 @@ async function getPostsByCategory(category) {
     }
 }
 
-async function save(title, content, category) {
+async function save(title, description, content, category) {
     console.log(`Saving new post in database`);
 
     var client;
@@ -135,6 +135,7 @@ async function save(title, content, category) {
 
         const newPost = {
             title: title, 
+            description: description,
             content: content, 
             category: category,
             post_id: lastPost ? lastPost.post_id + 1 : 1,
