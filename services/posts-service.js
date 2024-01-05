@@ -48,6 +48,8 @@ async function getPostById(postId) {
         const post = await posts.findOne({ post_id: parseFloat(postId) });
 
         post.content = await parseContent(post.content);
+        const modifiedPostDate = moment(post.date).format('DD-MM-YYYY HH:mm[h]');
+        post.date = modifiedPostDate;
 
         if (post.comments) {
             post.comments.forEach(async comment => {

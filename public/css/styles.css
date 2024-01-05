@@ -206,8 +206,17 @@ hr {
 }
 
 #post p {
-    color: black;
     line-height: 1.4em;
+}
+
+#post-content {
+    color: black;
+}
+
+#post-date {
+    text-align: right;
+    font-style: italic;
+    color: darkgrey;
 }
 
 #comments {
