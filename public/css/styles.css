@@ -316,6 +316,12 @@ hr {
     font-size: 30px;
     cursor: pointer;
     color: #035dc1;
+    margin-left: 10px;
+    display: none;
+}
+
+#responsive-menu {
+    display: none;
 }
 
 #responsive-menu-list {
@@ -332,6 +338,26 @@ hr {
 #responsive-menu-list li {
     padding: 10px;
     border-bottom: 1px solid #ccc;
+}
+
+#responsive-menu-list a:link {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#responsive-menu-list a:active {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#responsive-menu-list a:visited {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#responsive-menu-list a:hover {
+    text-decoration: none;
+    color: #035dc1;
 }
 
 /* Responsive styles */
@@ -491,6 +517,14 @@ hr {
     #comment-content, #comment-name, #comment-email, #send-comment {
         margin-left: 10px;
         margin-right: 10px;
+    }
+
+    #responsive-menu-icon {
+        display: inline;
+    }
+    
+    #responsive-menu {
+        display: inline;
     }
 }
 
