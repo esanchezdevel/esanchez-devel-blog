@@ -206,8 +206,17 @@ hr {
 }
 
 #post p {
-    color: black;
     line-height: 1.4em;
+}
+
+#post-content {
+    color: black;
+}
+
+#post-date {
+    text-align: right;
+    font-style: italic;
+    color: darkgrey;
 }
 
 #comments {
@@ -301,6 +310,54 @@ hr {
 .comments-data {
     color: darkgrey;
     font-size: 15px;
+}
+
+#responsive-menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    color: #035dc1;
+    margin-left: 10px;
+    display: none;
+}
+
+#responsive-menu {
+    display: none;
+}
+
+#responsive-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+#responsive-menu-list ul {
+    list-style: none;
+}
+
+#responsive-menu-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#responsive-menu-list a:link {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#responsive-menu-list a:active {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#responsive-menu-list a:visited {
+    text-decoration: none;
+    color: #035dc1;
+}
+
+#responsive-menu-list a:hover {
+    text-decoration: none;
+    color: #035dc1;
 }
 
 /* Responsive styles */
@@ -460,6 +517,14 @@ hr {
     #comment-content, #comment-name, #comment-email, #send-comment {
         margin-left: 10px;
         margin-right: 10px;
+    }
+
+    #responsive-menu-icon {
+        display: inline;
+    }
+    
+    #responsive-menu {
+        display: inline;
     }
 }
 
