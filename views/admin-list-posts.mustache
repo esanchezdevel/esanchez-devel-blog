@@ -18,10 +18,9 @@
                 <ul>
                     {{ #posts }}
                         <li>
-                            <a href="/admin/post/{{ post_id }}">
-                                <h3>- {{{ title }}}</h3>
-                            </a>
+                            <a href="/admin/post/{{ post_id }}">- {{{ title }}}</a>
                         </li>
+                        <hr>
                     {{/posts}}
                     </ul>
             </section>
