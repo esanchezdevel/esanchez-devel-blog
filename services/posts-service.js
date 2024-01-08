@@ -79,7 +79,7 @@ async function getAllPosts() {
         const database = client.db(DB_NAME);
         const posts = database.collection(DB_COLLECTION_POSTS);
 
-        const cursor = posts.find().sort({date: -1});
+        const cursor = posts.find({}, { projection: {post_id: 1, title: 1}}).sort({date: -1});
         const data = await cursor.toArray();
 
         // add each config to the result array

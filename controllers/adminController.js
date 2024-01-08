@@ -79,6 +79,25 @@ const adminController = {
             console.error('Error saving post in database: ', error);
             res.status(500).send('Internal Server Error');
         }
+    },
+
+    listAllPosts: async (req, res) => {
+        console.log(`Listing all posts`);
+
+        try {
+            const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
+
+            if (req.session.loggedin) {
+                const posts = await postsService.getAllPosts();
+                res.render('admin-list-posts', {siteConfiguration: siteConfiguration, posts: posts});
+            } else {
+                console.log(`User is not logged in`);
+                res.render('admin-login', {siteConfiguration: siteConfiguration});
+            }
+        } catch (error) {
+            console.log(`Error getting all posts: ${error}`);
+            res.status(500).send(`Internal Server Error: ${error}`);
+        }
     }
 };
 
