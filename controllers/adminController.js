@@ -98,6 +98,25 @@ const adminController = {
             console.log(`Error getting all posts: ${error}`);
             res.status(500).send(`Internal Server Error: ${error}`);
         }
+    },
+
+    getPost: async (req, res) => {
+        console.log(`Getting post to update ${req.params.postId}`);
+
+        try {
+            const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
+
+            if (req.session.loggedin) {
+                const post = await postsService.getPostById(req.params.postId);
+                res.render('admin-post-edit', {siteConfiguration: siteConfiguration, post: post});
+            } else {
+                console.log(`User is not logged in`);
+                res.render('admin-login', {siteConfiguration: siteConfiguration});
+            }
+        } catch (error) {
+            console.log(`Error getting post ${req.params.postId}: ${error}`);
+            res.status(500).send(`Internal Server Error: ${error}`);
+        }
     }
 };
 

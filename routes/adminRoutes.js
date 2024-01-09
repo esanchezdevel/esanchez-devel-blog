@@ -7,5 +7,6 @@ router.post('/login', adminController.login);
 router.get('/post/new', adminController.postNew);
 router.post('/post/new', adminController.savePost);
 router.get('/post/edit/list', adminController.listAllPosts);
+router.get('/post/:postId', adminController.getPost);
 
 module.exports = router;
