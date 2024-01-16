@@ -36,7 +36,7 @@
     margin: auto;
 }
 
-#admin-index-section h2, ul {
+#admin-index-section h2 {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
@@ -50,6 +50,9 @@
 
 #admin-index-section ul {
     list-style: none;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .admin-menu {
@@ -97,7 +100,7 @@
     height: 100%;
 }
 
-#admin-new-post-section h2, #admin-new-post-section form {
+#admin-new-post-section h2, #admin-new-post-section form, #admin-list-posts-section h2 {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -112,16 +115,50 @@
     padding-bottom: 3px;
 }
 
-#admin-new-post-section h2 {
+#admin-new-post-section h2, #admin-list-posts-section h2 {
     color: #035dc1;
     padding-bottom: 10px;
     border-bottom: 1px solid lightgrey;
 }
 
-#admin-new-post-section form {
+#admin-new-post-section form, #admin-list-posts-section ul {
     padding-bottom: 150px;
 }
 
 #new-post-title, #new-post-description, #new-post-content, #new-post-category, #new-post-format-buttons {
     margin-bottom: 20px;
+}
+
+#admin-list-posts-section {
+    width: 50%;
+    margin: auto;
+    height: 100%;
+}
+
+#admin-list-posts-section ul {
+    list-style: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#admin-list-posts-section ul a:link {
+    text-decoration: none;
+    color: black;
+}
+
+#admin-list-posts-section ul a:active {
+    text-decoration: none;
+    color: black;
+}
+
+#admin-list-posts-section ul a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+#admin-list-posts-section ul a:hover {
+    text-decoration: none;
+    color: #035dc1;
 }

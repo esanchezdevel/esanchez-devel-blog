@@ -79,6 +79,63 @@ const adminController = {
             console.error('Error saving post in database: ', error);
             res.status(500).send('Internal Server Error');
         }
+    },
+
+    listAllPosts: async (req, res) => {
+        console.log(`Listing all posts`);
+
+        try {
+            const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
+
+            if (req.session.loggedin) {
+                const posts = await postsService.getAllPosts();
+                res.render('admin-list-posts', {siteConfiguration: siteConfiguration, posts: posts});
+            } else {
+                console.log(`User is not logged in`);
+                res.render('admin-login', {siteConfiguration: siteConfiguration});
+            }
+        } catch (error) {
+            console.log(`Error getting all posts: ${error}`);
+            res.status(500).send(`Internal Server Error: ${error}`);
+        }
+    },
+
+    getPost: async (req, res) => {
+        console.log(`Getting post to update ${req.params.postId}`);
+
+        try {
+            const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
+
+            if (req.session.loggedin) {
+                const post = await postsService.getPostByIdToEdit(req.params.postId);
+                res.render('admin-post-edit', {siteConfiguration: siteConfiguration, post: post});
+            } else {
+                console.log(`User is not logged in`);
+                res.render('admin-login', {siteConfiguration: siteConfiguration});
+            }
+        } catch (error) {
+            console.log(`Error getting post ${req.params.postId}: ${error}`);
+            res.status(500).send(`Internal Server Error: ${error}`);
+        }
+    },
+
+    editPost: async (req, res) => {
+        const { postId, title, description, content, category } = req.body;
+
+        console.log(`Editing post ${postId}`);
+
+        try {
+            const result = await postsService.update(postId, title, description, content, category);
+            console.log(`Update result: ${result}`);
+            if (result) {
+                res.redirect('/admin');
+            } else {
+                res.redirect(`/admin/post/${postId}`);
+            }
+        } catch (error) {
+            console.error(`Error editing post ${postId} in database: `, error);
+            res.status(500).send(`Internal Server Error: ${error}`);
+        }
     }
 };
 
