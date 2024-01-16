@@ -45,7 +45,8 @@
                     <div id="new-post-content">
                         <textarea id="content" name="content" rows="30" cols="100" required>{{{ post.content }}}</textarea><br>
                     </div>
-                    <input type="submit" value="Guardar" class="custom-button">
+                    <input type="hidden" value="{{post.post_id}}" name="postId">
+                    <input type="submit" value="Editar" class="custom-button">
                 </form>
             </section>
             <footer>

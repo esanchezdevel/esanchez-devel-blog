@@ -117,6 +117,26 @@ const adminController = {
             console.log(`Error getting post ${req.params.postId}: ${error}`);
             res.status(500).send(`Internal Server Error: ${error}`);
         }
+    },
+
+    editPost: async (req, res) => {
+        const { postId, title, description, content, category } = req.body;
+
+        console.log(`Editing post ${postId}`);
+
+        try {
+            //const result = await postsService.save(title, description, content, category);
+            //console.log(`Insert result: ${result}`);
+            //if (result) {
+                res.redirect('/admin');
+            //} else {
+            //    res.redirect('/admin/post/new');
+            //}
+            
+        } catch (error) {
+            console.error(`Error editing post ${postId} in database: `, error);
+            res.status(500).send('Internal Server Error');
+        }
     }
 };
 
