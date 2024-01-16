@@ -189,6 +189,49 @@ async function save(title, description, content, category) {
     }
 }
 
+async function update(postId, title, description, content, category) {
+    console.log(`Updating post ${postId} in database`);
+
+    var client;
+
+    try {
+        client = await dbConnection.connect();
+
+        const database = client.db(DB_NAME);
+        const posts = database.collection(DB_COLLECTION_POSTS);
+
+        const result = await posts.updateOne(
+            {
+                post_id: parseFloat(postId) //The filter of the query
+            }, 
+            {
+                $set: { //The fields to be updated
+                    title: title,
+                    description: description,
+                    content: content,
+                    category: category,
+                    lastUpdate: new Date(Date.now())
+                }
+            },
+            {
+                upsert: false //If it's true insert the document if is not found
+            }
+        );
+        console.log(`Update result: ${JSON.stringify(result)}`);
+        if (result.modifiedCount === 1) {
+            console.log(`Posts updated: ${result.modifiedCount}`);
+            return true;
+        } else {
+            console.log(`Post NOT updated. Please check it`);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error updating post in database: ', error);
+    } finally {
+        await client.close();
+    }
+}
+
 async function saveComment(postId, email, name, content) {
     var client;
 
@@ -290,4 +333,4 @@ async function parseContent(content) {
     return result;
 }
 
-module.exports = { getLastPosts, getPostById, getPostByIdToEdit, getAllPosts, getPostsByCategory, save, saveComment };
+module.exports = { getLastPosts, getPostById, getPostByIdToEdit, getAllPosts, getPostsByCategory, save, update, saveComment };

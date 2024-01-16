@@ -125,17 +125,16 @@ const adminController = {
         console.log(`Editing post ${postId}`);
 
         try {
-            //const result = await postsService.save(title, description, content, category);
-            //console.log(`Insert result: ${result}`);
-            //if (result) {
+            const result = await postsService.update(postId, title, description, content, category);
+            console.log(`Update result: ${result}`);
+            if (result) {
                 res.redirect('/admin');
-            //} else {
-            //    res.redirect('/admin/post/new');
-            //}
-            
+            } else {
+                res.redirect(`/admin/post/${postId}`);
+            }
         } catch (error) {
             console.error(`Error editing post ${postId} in database: `, error);
-            res.status(500).send('Internal Server Error');
+            res.status(500).send(`Internal Server Error: ${error}`);
         }
     }
 };
