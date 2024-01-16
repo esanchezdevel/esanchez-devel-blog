@@ -14,15 +14,15 @@
             {{> site-header}}
             <hr>
             <section id="admin-new-post-section">
-                <h2>Admin Panel - Nuevo Post</h2>
-                <form action="/admin/post/new" method="post">
+                <h2>Admin Panel - Editar Post</h2>
+                <form action="/admin/post/edit" method="post">
                     <div id="new-post-title">
                         <label for="title">T&iacute;tulo:</label>
-                        <input type="text" id="title" name="title" size="93" required><br>
+                        <input type="text" id="title" name="title" size="93" value="{{{ post.title }}}" required><br>
                     </div>
                     <div id="new-post-description">
                         <label for="description">Descripci&oacute;n:</label>
-                        <input type="text" id="description" name="description" maxlength="150" size="93" required><br>
+                        <input type="text" id="description" name="description" maxlength="150" size="93" value="{{{ post.description }}}" required><br>
                     </div>
                     <div id="new-post-category">
                         <label for="category">Categor&iacute;a</label>
@@ -43,9 +43,10 @@
                         <p>*Lenguajes disponibles: java, css, html y javascript</p>
                     </div>
                     <div id="new-post-content">
-                        <textarea id="content" name="content" rows="30" cols="100" required></textarea><br>
+                        <textarea id="content" name="content" rows="30" cols="100" required>{{{ post.content }}}</textarea><br>
                     </div>
-                    <input type="submit" value="Guardar" class="custom-button">
+                    <input type="hidden" value="{{post.post_id}}" name="postId">
+                    <input type="submit" value="Editar" class="custom-button">
                 </form>
             </section>
             <footer>

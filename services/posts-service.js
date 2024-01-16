@@ -68,6 +68,35 @@ async function getPostById(postId) {
     }
 }
 
+async function getPostByIdToEdit(postId) {
+    console.log(`getting Post with id ${postId}`);
+
+    var client;
+
+    try {
+        client = await dbConnection.connect();
+
+        const database = client.db(DB_NAME);
+        const posts = database.collection(DB_COLLECTION_POSTS);
+
+        const post = await posts.findOne({ post_id: parseFloat(postId) });
+
+        if (post.comments) {
+            post.comments.forEach(async comment => {
+                const modifiedDate = moment(comment.date).format('DD-MM-YYYY HH:mm[h]');
+                comment.date = modifiedDate;
+                
+                comment.content = await parseContent(comment.content);
+            });
+        }
+        return post;
+    } catch (error) {
+        console.error('ERROR obtaining post from database:', error);
+    } finally {
+        await client.close();
+    }
+}
+
 async function getAllPosts() {
     console.log(`getting all posts`);
 
@@ -79,7 +108,7 @@ async function getAllPosts() {
         const database = client.db(DB_NAME);
         const posts = database.collection(DB_COLLECTION_POSTS);
 
-        const cursor = posts.find().sort({date: -1});
+        const cursor = posts.find({}, { projection: {post_id: 1, title: 1}}).sort({date: -1});
         const data = await cursor.toArray();
 
         // add each config to the result array
@@ -155,6 +184,49 @@ async function save(title, description, content, category) {
         }
     } catch (error) {
         console.error('Error saving post in database: ', error);
+    } finally {
+        await client.close();
+    }
+}
+
+async function update(postId, title, description, content, category) {
+    console.log(`Updating post ${postId} in database`);
+
+    var client;
+
+    try {
+        client = await dbConnection.connect();
+
+        const database = client.db(DB_NAME);
+        const posts = database.collection(DB_COLLECTION_POSTS);
+
+        const result = await posts.updateOne(
+            {
+                post_id: parseFloat(postId) //The filter of the query
+            }, 
+            {
+                $set: { //The fields to be updated
+                    title: title,
+                    description: description,
+                    content: content,
+                    category: category,
+                    lastUpdate: new Date(Date.now())
+                }
+            },
+            {
+                upsert: false //If it's true insert the document if is not found
+            }
+        );
+        console.log(`Update result: ${JSON.stringify(result)}`);
+        if (result.modifiedCount === 1) {
+            console.log(`Posts updated: ${result.modifiedCount}`);
+            return true;
+        } else {
+            console.log(`Post NOT updated. Please check it`);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error updating post in database: ', error);
     } finally {
         await client.close();
     }
@@ -261,4 +333,4 @@ async function parseContent(content) {
     return result;
 }
 
-module.exports = { getLastPosts, getPostById, getAllPosts, getPostsByCategory, save, saveComment };
+module.exports = { getLastPosts, getPostById, getPostByIdToEdit, getAllPosts, getPostsByCategory, save, update, saveComment };
