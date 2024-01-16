@@ -68,6 +68,35 @@ async function getPostById(postId) {
     }
 }
 
+async function getPostByIdToEdit(postId) {
+    console.log(`getting Post with id ${postId}`);
+
+    var client;
+
+    try {
+        client = await dbConnection.connect();
+
+        const database = client.db(DB_NAME);
+        const posts = database.collection(DB_COLLECTION_POSTS);
+
+        const post = await posts.findOne({ post_id: parseFloat(postId) });
+
+        if (post.comments) {
+            post.comments.forEach(async comment => {
+                const modifiedDate = moment(comment.date).format('DD-MM-YYYY HH:mm[h]');
+                comment.date = modifiedDate;
+                
+                comment.content = await parseContent(comment.content);
+            });
+        }
+        return post;
+    } catch (error) {
+        console.error('ERROR obtaining post from database:', error);
+    } finally {
+        await client.close();
+    }
+}
+
 async function getAllPosts() {
     console.log(`getting all posts`);
 
@@ -261,4 +290,4 @@ async function parseContent(content) {
     return result;
 }
 
-module.exports = { getLastPosts, getPostById, getAllPosts, getPostsByCategory, save, saveComment };
+module.exports = { getLastPosts, getPostById, getPostByIdToEdit, getAllPosts, getPostsByCategory, save, saveComment };

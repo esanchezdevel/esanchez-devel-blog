@@ -107,7 +107,7 @@ const adminController = {
             const siteConfiguration = await siteConfigurationService.getSiteConfiguration();
 
             if (req.session.loggedin) {
-                const post = await postsService.getPostById(req.params.postId);
+                const post = await postsService.getPostByIdToEdit(req.params.postId);
                 res.render('admin-post-edit', {siteConfiguration: siteConfiguration, post: post});
             } else {
                 console.log(`User is not logged in`);
