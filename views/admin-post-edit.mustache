@@ -39,7 +39,8 @@
                         <button class="custom-button" onclick="return addTag('i')">Cursiva</button>
                         <button class="custom-button" onclick="return addTag('img')">Img</button>
                         <button class="custom-button" onclick="return addTag('color')">Color red</button>
-                        <button class="custom-button" onclick="return addTag('code')">Code*</button><br>
+                        <button class="custom-button" onclick="return addTag('code')">Code*</button>
+                        <button class="custom-button" onclick="return addTag('link')">Link</button><br>
                         <p>*Lenguajes disponibles: java, css, html y javascript</p>
                     </div>
                     <div id="new-post-content">
@@ -69,6 +70,14 @@
                                     content.value.slice(content.selectionEnd);
                 } else if (tag === 'img') {
                     content.value = content.value.slice(0, content.selectionStart) + '[img=""]';
+                } else if (tag === 'link') {
+                    // Create the text to be added
+                    var textToAdd = selectedText ? '[link=""]' + selectedText + '[/link]' : '[link=""][/link]';
+
+                    // Insert the text in the textarea
+                    content.value = content.value.slice(0, content.selectionStart) +
+                                    textToAdd +
+                                    content.value.slice(content.selectionEnd);
                 } else if (tag === 'color') {
                     var textToAdd = selectedText ? '[color=red]' + selectedText + '[/color]' : '[color=red][/color]';
 
