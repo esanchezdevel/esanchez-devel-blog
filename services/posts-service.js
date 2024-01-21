@@ -151,7 +151,7 @@ async function getPostsByCategory(category) {
     }
 }
 
-async function save(title, description, content, category) {
+async function save(title, description, keywords, content, category) {
     console.log(`Saving new post in database`);
 
     var client;
@@ -164,9 +164,12 @@ async function save(title, description, content, category) {
 
         const lastPost = await posts.findOne({}, { sort: { post_id: -1 } });
 
+        const keywordsArray = keywords.split(', ');
+
         const newPost = {
             title: title, 
             description: description,
+            keywords: keywordsArray,
             content: content, 
             category: category,
             post_id: lastPost ? lastPost.post_id + 1 : 1,
