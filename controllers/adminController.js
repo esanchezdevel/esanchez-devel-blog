@@ -120,12 +120,12 @@ const adminController = {
     },
 
     editPost: async (req, res) => {
-        const { postId, title, description, content, category } = req.body;
+        const { postId, title, description, keywords, content, category } = req.body;
 
         console.log(`Editing post ${postId}`);
 
         try {
-            const result = await postsService.update(postId, title, description, content, category);
+            const result = await postsService.update(postId, title, description, keywords, content, category);
             console.log(`Update result: ${result}`);
             if (result) {
                 res.redirect('/admin');
