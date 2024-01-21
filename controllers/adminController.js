@@ -64,10 +64,10 @@ const adminController = {
     savePost: async (req, res) => {
         console.log(`Saving new post in database`);
 
-        const { title, description, content, category } = req.body;
+        const { title, description, keywords, content, category } = req.body;
 
         try {
-            const result = await postsService.save(title, description, content, category);
+            const result = await postsService.save(title, description, keywords, content, category);
             console.log(`Insert result: ${result}`);
             if (result) {
                 res.redirect('/admin');
@@ -120,12 +120,12 @@ const adminController = {
     },
 
     editPost: async (req, res) => {
-        const { postId, title, description, content, category } = req.body;
+        const { postId, title, description, keywords, content, category } = req.body;
 
         console.log(`Editing post ${postId}`);
 
         try {
-            const result = await postsService.update(postId, title, description, content, category);
+            const result = await postsService.update(postId, title, description, keywords, content, category);
             console.log(`Update result: ${result}`);
             if (result) {
                 res.redirect('/admin');
