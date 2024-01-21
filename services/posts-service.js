@@ -51,6 +51,14 @@ async function getPostById(postId) {
         const modifiedPostDate = moment(post.date).format('DD-MM-YYYY HH:mm[h]');
         post.date = modifiedPostDate;
 
+        if (post.keywords && post.keywords.length > 0) {
+            const keywords = post.keywords.join(', ');
+            post.keywords = keywords;
+        } else {
+            post.keywords = '';
+        }
+
+
         if (post.comments) {
             post.comments.forEach(async comment => {
                 const modifiedDate = moment(comment.date).format('DD-MM-YYYY HH:mm[h]');
