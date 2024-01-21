@@ -51,6 +51,14 @@ async function getPostById(postId) {
         const modifiedPostDate = moment(post.date).format('DD-MM-YYYY HH:mm[h]');
         post.date = modifiedPostDate;
 
+        if (post.keywords && post.keywords.length > 0) {
+            const keywords = post.keywords.join(', ');
+            post.keywords = keywords;
+        } else {
+            post.keywords = '';
+        }
+
+
         if (post.comments) {
             post.comments.forEach(async comment => {
                 const modifiedDate = moment(comment.date).format('DD-MM-YYYY HH:mm[h]');
@@ -80,6 +88,11 @@ async function getPostByIdToEdit(postId) {
         const posts = database.collection(DB_COLLECTION_POSTS);
 
         const post = await posts.findOne({ post_id: parseFloat(postId) });
+
+        if (post.keywords && post.keywords.length > 0) {
+            const keywords = post.keywords.join(', ');
+            post.keywords = keywords;
+        }
 
         if (post.comments) {
             post.comments.forEach(async comment => {
@@ -151,7 +164,7 @@ async function getPostsByCategory(category) {
     }
 }
 
-async function save(title, description, content, category) {
+async function save(title, description, keywords, content, category) {
     console.log(`Saving new post in database`);
 
     var client;
@@ -164,9 +177,12 @@ async function save(title, description, content, category) {
 
         const lastPost = await posts.findOne({}, { sort: { post_id: -1 } });
 
+        const keywordsArray = keywords.split(', ');
+
         const newPost = {
             title: title, 
             description: description,
+            keywords: keywordsArray,
             content: content, 
             category: category,
             post_id: lastPost ? lastPost.post_id + 1 : 1,
@@ -189,7 +205,7 @@ async function save(title, description, content, category) {
     }
 }
 
-async function update(postId, title, description, content, category) {
+async function update(postId, title, description, keywords, content, category) {
     console.log(`Updating post ${postId} in database`);
 
     var client;
@@ -200,6 +216,8 @@ async function update(postId, title, description, content, category) {
         const database = client.db(DB_NAME);
         const posts = database.collection(DB_COLLECTION_POSTS);
 
+        const keywordsArray = keywords.split(', ');
+
         const result = await posts.updateOne(
             {
                 post_id: parseFloat(postId) //The filter of the query
@@ -208,6 +226,7 @@ async function update(postId, title, description, content, category) {
                 $set: { //The fields to be updated
                     title: title,
                     description: description,
+                    keywords: keywordsArray,
                     content: content,
                     category: category,
                     lastUpdate: new Date(Date.now())
